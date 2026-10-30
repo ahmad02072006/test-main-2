@@ -1,7 +1,7 @@
 const TMDB_KEY = 'YOUR_TMDB_API_KEY';
-const poster = (path, size = 'w500') => path ? `https://image.tmdb.org/t/p/${size}${path}` : '';
+const poster = (path, size = 'w342') => path ? `https://image.tmdb.org/t/p/${size}${path}` : '';
 const posterSrcSet = (path) => path
-    ? ['w342', 'w500', 'w780'].map((size) => `${poster(path, size)} ${Number(size.slice(1))}w`).join(', ')
+    ? ['w185', 'w342'].map((size) => `${poster(path, size)} ${Number(size.slice(1))}w`).join(', ')
     : '';
 const secureImageUrl = (url) => url?.replace(/^http:/, 'https:') || '';
 export async function searchMovies(query = 'popular', filters = {}) {

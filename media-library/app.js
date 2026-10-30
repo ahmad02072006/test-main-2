@@ -26,12 +26,13 @@ function updateCount() {
 
 function render(items) {
     state.items = items;
+    const eagerCount = window.matchMedia('(max-width: 760px)').matches ? 2 : 5;
     $('results').innerHTML = items.map((item, index) => {
         const title = escapeHTML(item.title);
         const id = escapeHTML(item.id);
         const saved = isSaved(item.id);
         const image = item.image
-            ? `<img class="cover-image" src="${escapeHTML(item.image)}"${item.imageSrcSet ? ` srcset="${escapeHTML(item.imageSrcSet)}"` : ''} sizes="(max-width: 760px) 42vw, 18vw" width="500" height="750" loading="${index < 5 ? 'eager' : 'lazy'}" decoding="async" alt="${item.type === 'movie' ? 'Film poster' : 'Book cover'} for ${title}"/>`
+            ? `<img class="cover-image" src="${escapeHTML(item.image)}"${item.imageSrcSet ? ` srcset="${escapeHTML(item.imageSrcSet)}"` : ''} sizes="(max-width: 760px) calc((100vw - 59px)/2), (max-width: 1240px) calc((90vw - 72px)/5), 209px" width="500" height="750" loading="${index < eagerCount ? 'eager' : 'lazy'}" decoding="async" alt="${item.type === 'movie' ? 'Film poster' : 'Book cover'} for ${title}"/>`
             : '';
         return `<article class="story-card" data-story-id="${id}"><div class="cover ${item.image ? '' : 'empty-cover'}">${image}<span aria-hidden="true">${item.type === 'movie' ? 'FILM' : 'BOOK'}</span><button class="cover-open" data-open-story="${id}" aria-label="View details for ${title}" type="button"></button><button class="save" data-save="${id}" aria-label="${saved ? 'Remove' : 'Save'} ${title} ${saved ? 'from' : 'to'} your list" aria-pressed="${saved}" type="button">${saved ? '♥' : '＋'}</button></div><div class="card-info"><h3><button class="story-title" data-open-story="${id}" type="button">${title}</button></h3><p>${escapeHTML(item.year)} <i>·</i> ${item.rating === '—' ? '' : `★ ${escapeHTML(item.rating)}`}</p></div></article>`;
     }).join('');
