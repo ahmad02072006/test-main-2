@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Rate / Currency Converter
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <main class="shell">
+   <header>
+    <a class="brand" href=".">
+     <span>
+      R/
+     </span>
+     Rate
+    </a>
+    <div class="header-note">
+     CURRENCY INTELLIGENCE
+     <i>
+     </i>
+     LIVE RATES
+    </div>
+   </header>
+   <section class="intro">
+    <p class="eyebrow">
+     YOUR MONEY, IN MOTION
+    </p>
+    <h1>
+     Know what
+     <br/>
+     <em>
+      it’s worth.
+     </em>
+    </h1>
+    <p>
+     Clear conversion for the currencies that move with you.
+    </p>
+   </section>
+   <section class="converter">
+    <div class="amount-wrap">
+     <label for="amount">
+      Amount
+     </label>
+     <input id="amount" min="0" step="any" type="number" value="100"/>
+    </div>
+    <div class="currency-field">
+     <label for="from">
+      From
+     </label>
+     <select id="from">
+      <option>
+       USD
+      </option>
+      <option>
+       EUR
+      </option>
+      <option>
+       GBP
+      </option>
+      <option>
+       JPY
+      </option>
+      <option>
+       CAD
+      </option>
+      <option>
+       AUD
+      </option>
+      <option>
+       KRW
+      </option>
+      <option>
+       UZS
+      </option>
+      <option>
+       BTC
+      </option>
+      <option>
+       ETH
+      </option>
+      <option>
+       SOL
+      </option>
+     </select>
+    </div>
+    <button class="swap" id="swap" title="Swap currencies" type="button">
+     ⇄
+    </button>
+    <div class="currency-field">
+     <label for="to">
+      To
+     </label>
+     <select id="to">
+      <option>
+       EUR
+      </option>
+      <option>
+       USD
+        <option>
+         KRW
+        </option>
+        <option>
+         UZS
+        </option>
+      </option>
+      <option>
+       GBP
+      </option>
+      <option>
+       JPY
+      </option>
+      <option>
+       CAD
+      </option>
+      <option>
+       AUD
+      </option>
+      <option>
+       BTC
+      </option>
+      <option>
+       ETH
+      </option>
+      <option>
+       SOL
+      </option>
+     </select>
+    </div>
+    <div class="result">
+     <span id="result-label">
+      100 USD equals
+     </span>
+        <option>
+         KRW
+        </option>
+        <option>
+         UZS
+        </option>
+     <strong id="result">
+      —
+     </strong>
+     <span id="rate-note">
+      Fetching current rate...
+     </span>
+    </div>
+   </section>
+   <p class="status" id="status">
+   </p>
+   <section class="trend">
+    <div class="trend-heading">
+     <div>
+      <p class="eyebrow">
+       MARKET PULSE / 7 DAYS
+      </p>
+      <h2>
+       Recent movement
+      </h2>
+     </div>
+     <span id="trend-pair">
+      USD / EUR
+     </span>
+    </div>
+    <div class="chart-wrap">
+     <canvas id="rate-chart">
+     </canvas>
+    </div>
+   </section>
+   <footer>
+    <span>
+     R/ RATE CONVERTER
+    </span>
+    <span>
+     Rates by ExchangeRate-API + CoinGecko
+    </span>
+   </footer>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  </script>
+  <script src="app.js" type="module">
+  </script>
+ </body>
+</html>
+

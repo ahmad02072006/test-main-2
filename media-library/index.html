@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Reel / Read
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <main class="shell">
+   <header>
+    <a class="brand" href=".">
+     REEL
+     <span>
+      /
+     </span>
+     READ
+    </a>
+    <nav>
+     <button class="nav-button active" data-type="movie">
+      Movies
+     </button>
+     <button class="nav-button" data-type="book">
+      Books
+     </button>
+     <button class="list-button" id="list-button">
+      My list
+      <b id="list-count">
+       0
+      </b>
+     </button>
+    </nav>
+   </header>
+   <section class="masthead">
+    <div>
+     <p class="eyebrow">
+      A PERSONAL INDEX OF STORIES
+     </p>
+     <h1>
+      Find your
+      <br/>
+      <em>
+       next world.
+      </em>
+     </h1>
+    </div>
+    <div class="search-block">
+     <label for="search">
+      Search by title, person, or idea
+     </label>
+     <div class="search-row">
+      <input id="search" placeholder="Try “Dune” or “quiet ambition”" type="search"/>
+      <span>
+       ⌕
+      </span>
+     </div>
+     <div class="filters">
+      <select id="genre">
+       <option value="">
+        All genres
+       </option>
+       <option value="28">
+        Action
+       </option>
+       <option value="35">
+        Comedy
+       </option>
+       <option value="18">
+        Drama
+       </option>
+       <option value="878">
+        Science fiction
+       </option>
+      </select>
+      <select id="year">
+       <option value="">
+        Any year
+       </option>
+       <option>
+        2025
+       </option>
+       <option>
+        2024
+       </option>
+       <option>
+        2023
+       </option>
+       <option>
+        2022
+       </option>
+      </select>
+     </div>
+    </div>
+   </section>
+   <section class="results-section">
+    <div class="results-heading">
+     <h2 id="results-title">
+      Popular this week
+     </h2>
+     <span id="result-status">
+      Loading a few good stories...
+     </span>
+    </div>
+    <div class="results-grid" id="results">
+    </div>
+   </section>
+   <aside aria-hidden="true" class="drawer" id="list-drawer">
+    <div class="drawer-head">
+     <h2>
+      Your list
+     </h2>
+     <button aria-label="Close list" id="close-list">
+      ×
+     </button>
+    </div>
+    <p class="drawer-note">
+     Stories you want to keep close.
+    </p>
+    <div id="saved-list">
+    </div>
+   </aside>
+   <div aria-hidden="true" class="modal" id="modal">
+    <div class="modal-card">
+     <button aria-label="Close details" class="close" id="close-modal">
+      ×
+     </button>
+     <div id="modal-content">
+     </div>
+    </div>
+   </div>
+   <footer>
+    <span>
+     REEL / READ
+    </span>
+    <span>
+     Stories are better when chosen slowly.
+    </span>
+   </footer>
+  </main>
+  <script src="app.js" type="module">
+  </script>
+ </body>
+</html>
+

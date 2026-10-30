@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Global Trip Guide
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <main class="app-shell">
+   <header class="topbar" data-reveal>
+    <div class="topbar-inner">
+     <div class="topbar-main">
+      <a class="brand" href=".">
+       <span class="brand-mark">◌</span>
+       Global Trip Guide
+      </a>
+      <div class="topbar-meta">
+       <span id="last-updated">Ready to explore</span>
+       <button class="unit-toggle" id="unit-toggle" type="button">°C <span>/ °F</span></button>
+      </div>
+     </div>
+     <nav aria-label="Trip guide sections" class="trip-nav">
+      <a class="nav-link is-active" href="#destination"><span aria-hidden="true">⌖</span> Destination</a>
+      <a class="nav-link" href="#forecast"><span aria-hidden="true">☼</span> Weather</a>
+      <a class="nav-link" href="#currency"><span aria-hidden="true">¤</span> Currency</a>
+     </nav>
+    </div>
+   </header>
+   <section aria-labelledby="destination-title" class="destination-hero" data-reveal id="destination">
+    <div class="destination-hero-inner">
+     <div class="destination-copy">
+      <p class="hero-eyebrow">YOUR TRIP STARTS HERE</p>
+      <h1 id="destination-title">Find your<br/><em>next destination.</em></h1>
+      <p>Check the local forecast and convert your travel money before you go.</p>
+     </div>
+     <div aria-hidden="true" class="destination-art">
+      <span class="art-sun"></span>
+      <span class="art-cloud cloud-one">☁</span>
+      <span class="art-cloud cloud-two">☁</span>
+      <span class="art-orbit"></span>
+      <span class="art-coordinate">35° 41′ N&nbsp; / &nbsp;139° 41′ E</span>
+      <span class="art-caption">A WORLD OF POSSIBILITIES</span>
+     </div>
+     <form class="search-form destination-search" id="search-form">
+      <label class="sr-only" for="city-input">Search a destination</label>
+      <div class="search-row">
+       <span aria-hidden="true" class="search-icon">⌖</span>
+       <input autocomplete="off" id="city-input" placeholder="Where do you want to go?" type="search"/>
+       <button aria-label="Search destination" type="submit">Search <span aria-hidden="true">→</span></button>
+      </div>
+      <ul aria-label="Matching locations" class="location-results" id="location-results"></ul>
+     </form>
+     <p class="status" id="status" role="status">Detecting your location...</p>
+    </div>
+   </section>
+   <section aria-labelledby="current-title" class="weather-overview" data-reveal>
+    <div class="weather-overview-copy">
+     <p class="eyebrow">YOUR TRIP, AT A GLANCE</p>
+     <h2 id="current-title">Know before<br/>you go.</h2>
+     <p>Live conditions and a five-day outlook for the place you want to explore.</p>
+    </div>
+    <div class="current-panel" id="current-panel">
+     <div class="panel-kicker">CURRENT CONDITIONS</div>
+     <div class="current-location">
+      <div><h2 id="location-name">Your location</h2><p id="location-time">Local conditions</p></div>
+      <span class="weather-icon" id="weather-icon">☼</span>
+     </div>
+     <div class="temperature"><span id="temperature">--</span><sup>°</sup><span id="temperature-unit">C</span></div>
+     <p class="condition" id="condition">Waiting for a forecast</p>
+     <div class="metrics">
+      <div><b id="feels-like">--</b><span>Feels like</span></div>
+      <div><b id="humidity">--</b><span>Humidity</span></div>
+      <div><b id="wind">--</b><span>Wind</span></div>
+     </div>
+    </div>
+   </section>
+   <section class="content-section" data-reveal id="forecast">
+    <div class="section-heading">
+     <div>
+      <p class="eyebrow">
+       THE NEXT FIVE DAYS
+      </p>
+      <h2>
+       Forecast rhythm
+      </h2>
+     </div>
+     <p class="section-note">
+      A glanceable plan for the days ahead.
+     </p>
+    </div>
+    <div class="forecast-grid" id="forecast-grid">
+    </div>
+   </section>
+   <section aria-labelledby="currency-title" class="currency-section" data-reveal id="currency">
+    <div class="section-heading">
+     <div>
+      <p class="eyebrow">MONEY FOR THE JOURNEY</p>
+      <h2 id="currency-title">Currency converter</h2>
+     </div>
+     <p class="section-note">Reference exchange rates, updated on business days.</p>
+    </div>
+    <div class="currency-card">
+     <label class="currency-field">
+      <span>Amount</span>
+      <input id="currency-amount" type="number" min="0" step="any" value="100" inputmode="decimal"/>
+     </label>
+     <label class="currency-field">
+      <span>From</span>
+      <select id="currency-from" aria-label="Convert from currency"></select>
+     </label>
+     <button aria-label="Swap currencies" class="currency-swap" id="currency-swap" type="button">⇄</button>
+     <label class="currency-field">
+      <span>To</span>
+      <select id="currency-to" aria-label="Convert to currency"></select>
+     </label>
+     <div aria-live="polite" class="currency-result">
+      <strong id="currency-output">—</strong>
+      <span id="currency-status" role="status">Loading currencies...</span>
+     </div>
+    </div>
+   </section>
+   <section class="recommendation-section" data-reveal>
+    <div class="recommendation-card">
+     <div class="recommendation-icon">
+      ✦
+     </div>
+     <div>
+      <p class="eyebrow">A GOOD TRIP STARTS PREPARED</p>
+      <h2 id="recommendation-title">
+       Pack your curiosity.
+      </h2>
+      <p id="recommendation-text">
+       Search for a destination to see its forecast and start planning your trip.
+      </p>
+     </div>
+    </div>
+   </section>
+   <footer data-reveal>
+    <span>
+     GLOBAL TRIP GUIDE / WEATHER &amp; CURRENCY
+    </span>
+    <span>
+     Weather by Open-Meteo · Rates by Frankfurter
+    </span>
+   </footer>
+  </main>
+  <script src="app.js" type="module">
+  </script>
+ </body>
+</html>

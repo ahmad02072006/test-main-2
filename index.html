@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta name="description" content="Discover destinations around the world, build a trip itinerary, check the weather, and prepare your travel budget with API Atlas."/>
+  <meta name="theme-color" content="#f5f1e9"/>
+  <title>API Atlas | Discover your next destination</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   *{box-sizing:border-box}
+   :root{--ink:#182522;--muted:#718079;--paper:#f5f1e9;--line:#d9ded7;--sea:#b9d9d4;--coral:#e9785e;--sun:#f0cf72;--night:#1d3b3b}
+   html{scroll-behavior:smooth}
+   body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}
+   a{color:inherit}
+   button,input{font:inherit}
+   .hub{max-width:1440px;margin:auto;padding:0 4.5vw 36px}
+   .top{height:82px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}
+   .logo{font:700 20px 'Space Grotesk';letter-spacing:-.04em;text-decoration:none}
+   .logo span{color:var(--coral)}
+   .top-nav{display:flex;align-items:center;gap:28px}
+   .top-nav a{font-size:13px;text-decoration:none}
+   .top-nav a:hover{color:var(--coral)}
+   .top-nav .nav-cta{padding:12px 16px;background:var(--night);color:white;font-weight:600}
+   .hero{position:relative;margin:22px 0 0}
+   .hero-frame{height:min(68vw,650px);min-height:450px;position:relative;overflow:hidden;background:#5e7772;color:white}
+   .hero-frame:after{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,24,23,.66),rgba(8,24,23,.13) 70%),linear-gradient(0deg,rgba(8,24,23,.35),transparent 40%);content:""}
+   .hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .45s ease,transform 7s linear;transform:scale(1.02)}
+   .hero-image.is-changing{opacity:.35;transform:scale(1)}
+   .hero-copy{position:absolute;z-index:1;left:clamp(26px,7vw,100px);top:50%;width:min(580px,72%);transform:translateY(-50%)}
+   .eyebrow{margin:0 0 16px;color:var(--coral);font:700 10px 'Space Grotesk';letter-spacing:.16em}
+   .hero-copy .eyebrow{color:#f3d7ab}
+   .hero-copy h1{max-width:650px;margin:0 0 15px;font:600 clamp(48px,7vw,88px)/.93 'Space Grotesk';letter-spacing:-.07em}
+   .hero-copy p:not(.eyebrow){max-width:440px;margin:0;color:#f0f3ef;font-size:16px;line-height:1.6}
+   .hero-actions{display:flex;align-items:center;gap:18px;margin-top:27px}
+   .hero-link{display:inline-flex;align-items:center;gap:22px;padding:15px 18px;background:white;color:var(--ink);text-decoration:none;font:600 13px 'Space Grotesk'}
+   .hero-link:hover{background:var(--sun)}
+   .hero-count{font:600 12px 'Space Grotesk';letter-spacing:.12em}
+   .carousel-controls{position:absolute;z-index:2;right:30px;bottom:30px;display:flex;align-items:center;gap:10px}
+   .carousel-button{width:44px;height:44px;border:1px solid #ffffff99;background:#18312e66;color:white;font-size:20px;cursor:pointer}
+   .carousel-button:hover{background:white;color:var(--ink)}
+   .carousel-dots{display:flex;gap:7px;margin:0 10px}
+   .carousel-dot{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#ffffff80;cursor:pointer}
+   .carousel-dot[aria-current="true"]{width:25px;border-radius:6px;background:white}
+   .search-wrap{position:relative;z-index:3;max-width:850px;margin:-32px auto 0;padding:0 20px}
+   .destination-search{display:flex;align-items:end;gap:14px;padding:18px 20px;background:white;box-shadow:0 12px 45px #1825221a}
+   .search-field{flex:1}
+   .search-field label{display:block;margin-bottom:8px;font:600 12px 'Space Grotesk'}
+   .search-field input{width:100%;height:42px;border:0;border-bottom:1px solid var(--line);border-radius:0;background:white;color:var(--ink);font-size:15px;outline:none}
+   .search-field input:focus{border-color:var(--dark-green,#587b6c)}
+   .search-field input::placeholder{color:#99a29d}
+   .search-submit{height:44px;padding:0 20px;border:0;background:var(--coral);color:white;font:600 13px 'Space Grotesk';cursor:pointer}
+   .search-submit:hover{background:#d7654c}
+   .section{padding-top:76px}
+   .section-heading{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:24px}
+   .section-heading h2{margin:0;font:600 clamp(28px,4vw,40px)/1.08 'Space Grotesk';letter-spacing:-.05em}
+   .section-note{max-width:380px;margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+   .destination-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+   .destination-card{position:relative;min-height:330px;overflow:hidden;color:white;text-decoration:none;background:#385d55}
+   .destination-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .5s}
+   .destination-card:after{position:absolute;inset:0;background:linear-gradient(0deg,#101d1bd9,transparent 70%);content:""}
+   .destination-card:hover img{transform:scale(1.06)}
+   .destination-info{position:absolute;z-index:1;right:20px;bottom:20px;left:20px}
+   .destination-info small{font:700 10px 'Space Grotesk';letter-spacing:.14em;text-transform:uppercase}
+   .destination-info h3{margin:8px 0;font:600 27px 'Space Grotesk';letter-spacing:-.04em}
+   .destination-info p{margin:0;color:#e5ebe8;font-size:12px;line-height:1.5}
+   .destination-info span{float:right;font-size:20px}
+   .toolkit{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+   .tool{min-height:200px;padding:22px;background:#fffdf8;text-decoration:none;transition:transform .2s}
+   .tool:hover{transform:translateY(-4px)}
+   .tool small{font:700 10px 'Space Grotesk';letter-spacing:.12em;color:var(--coral)}
+   .tool h3{margin:28px 0 9px;font:600 21px 'Space Grotesk'}
+   .tool p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}
+   .closing{display:flex;align-items:center;justify-content:space-between;gap:28px;margin-top:76px;padding:32px;background:var(--night);color:white}
+   .closing h2{margin:0 0 9px;font:600 28px 'Space Grotesk';letter-spacing:-.04em}
+   .closing p{max-width:610px;margin:0;color:#c5d8d1;font-size:13px;line-height:1.6}
+   .closing .hero-link{flex-shrink:0;background:var(--coral);color:white}
+   .closing .hero-link:hover{background:#d7654c}
+   footer{display:flex;justify-content:space-between;gap:14px;margin-top:48px;padding-top:20px;border-top:1px solid var(--line);color:var(--muted);font-size:10px;letter-spacing:.1em}
+   @media(max-width:900px){.destination-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.toolkit{grid-template-columns:repeat(2,1fr)}}
+   @media(max-width:650px){.hub{padding:0 18px 26px}.top{height:70px}.top-nav{gap:12px}.top-nav a:not(.nav-cta){display:none}.hero{margin-top:14px}.hero-frame{height:590px;min-height:0}.hero-copy{left:25px;top:43%;width:calc(100% - 50px)}.hero-copy h1{font-size:clamp(46px,12vw,70px)}.hero-copy p:not(.eyebrow){font-size:14px}.carousel-controls{right:18px;bottom:20px}.search-wrap{margin-top:-15px;padding:0 10px}.destination-search{display:grid;grid-template-columns:1fr;padding:16px}.search-submit{width:100%}.section{padding-top:56px}.section-heading{display:block}.section-note{margin-top:12px}.destination-grid{gap:9px}.destination-card{min-height:260px}.destination-info{right:13px;bottom:14px;left:13px}.destination-info h3{font-size:22px}.destination-info p{font-size:11px}.tool{min-height:180px;padding:17px}.tool h3{margin-top:22px;font-size:18px}.closing{display:block;margin-top:56px;padding:24px}.closing .hero-link{margin-top:20px}footer{flex-direction:column;line-height:1.5}}
+   @media(max-width:390px){.destination-grid,.toolkit{grid-template-columns:1fr}.destination-card{min-height:300px}.carousel-dots{margin:0 3px}}
+   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero-image,.destination-card img,.tool{transition:none}}
+  </style>
+ </head>
+ <body>
+  <main class="hub">
+   <header class="top">
+    <a class="logo" href="./">API <span>ATLAS</span></a>
+    <nav class="top-nav" aria-label="Main navigation">
+     <a href="#destinations">Discover</a>
+     <a href="#travel-tools">Travel tools</a>
+     <a class="nav-cta" href="trip-planner/">Plan a trip ↗</a>
+    </nav>
+   </header>
+   <section class="hero" aria-label="Featured destinations">
+    <div class="hero-frame">
+     <img class="hero-image" id="hero-image" src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&amp;fit=crop&amp;w=2000&amp;q=85" alt="Traditional streets and rooftops in Kyoto"/>
+     <div class="hero-copy" aria-live="polite">
+      <p class="eyebrow" id="hero-eyebrow">JAPAN · CULTURE &amp; CITY LIFE</p>
+      <h1 id="hero-title">A slower side<br/>of Kyoto.</h1>
+      <p id="hero-description">Lantern-lit lanes, temple gardens, and mornings that invite you to wander.</p>
+      <div class="hero-actions">
+       <a class="hero-link" id="hero-link" href="trip-planner/index.html?destination=Kyoto%2C%20Japan">Explore Kyoto <span aria-hidden="true">↗</span></a>
+       <span class="hero-count" id="hero-count">01 / 04</span>
+      </div>
+     </div>
+     <div class="carousel-controls" aria-label="Featured destination controls">
+      <button class="carousel-button" id="previous-slide" type="button" aria-label="Previous destination">←</button>
+      <div class="carousel-dots" id="carousel-dots" aria-label="Choose a destination"></div>
+      <button class="carousel-button" id="next-slide" type="button" aria-label="Next destination">→</button>
+     </div>
+    </div>
+    <div class="search-wrap">
+     <form class="destination-search" id="destination-search">
+      <div class="search-field">
+       <label for="destination-query">Where would you like to explore?</label>
+       <input id="destination-query" name="destination" placeholder="Try a city or country" required autocomplete="off"/>
+      </div>
+      <button class="search-submit" type="submit">Find a destination ↗</button>
+     </form>
+    </div>
+   </section>
+   <section class="section" id="destinations">
+    <div class="section-heading">
+     <div>
+      <p class="eyebrow">A LITTLE INSPIRATION</p>
+      <h2>Places to start dreaming about.</h2>
+     </div>
+     <p class="section-note">From big-city weekends to sunlit coastlines, find a place that feels like your kind of trip.</p>
+    </div>
+    <div class="destination-grid">
+     <a class="destination-card" href="trip-planner/index.html?destination=Paris%2C%20France">
+      <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" loading="lazy"/>
+      <div class="destination-info"><small>FRANCE · CITY BREAK</small><h3>Paris <span aria-hidden="true">↗</span></h3><p>Museum afternoons and cafe mornings.</p></div>
+     </a>
+     <a class="destination-card" href="trip-planner/index.html?destination=Tokyo%2C%20Japan">
+      <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" loading="lazy"/>
+      <div class="destination-info"><small>JAPAN · BIG CITY</small><h3>Tokyo <span aria-hidden="true">↗</span></h3><p>Neon nights, quiet shrines, endless neighborhoods.</p></div>
+     </a>
+     <a class="destination-card" href="trip-planner/index.html?destination=Istanbul%2C%20Turkey">
+      <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" loading="lazy"/>
+      <div class="destination-info"><small>TURKEY · CULTURE</small><h3>Istanbul <span aria-hidden="true">↗</span></h3><p>Crossroads of flavors, history, and waterways.</p></div>
+     </a>
+     <a class="destination-card" href="trip-planner/index.html?destination=Bali%2C%20Indonesia">
+      <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" loading="lazy"/>
+      <div class="destination-info"><small>INDONESIA · ISLAND ESCAPE</small><h3>Bali <span aria-hidden="true">↗</span></h3><p>Green rice terraces and an easy island rhythm.</p></div>
+     </a>
+    </div>
+   </section>
+   <section class="section" id="travel-tools">
+    <div class="section-heading">
+     <div>
+      <p class="eyebrow">YOUR TRAVEL TOOLKIT</p>
+      <h2>Make the details easier.</h2>
+     </div>
+     <p class="section-note">A good trip is more than a destination. Get the practical pieces together before you go.</p>
+    </div>
+    <div class="toolkit">
+     <a class="tool" href="trip-planner/"><small>01 / ITINERARY</small><h3>Build your trip.</h3><p>Discover nearby places and turn a destination into a seven-day outline.</p></a>
+     <a class="tool" href="weather-travel/"><small>02 / WEATHER</small><h3>Pack for the place.</h3><p>Check conditions and forecasts for destinations around the world.</p></a>
+     <a class="tool" href="currency-converter/"><small>03 / CURRENCY</small><h3>Get budget-ready.</h3><p>Convert currencies and compare travel spending in local money.</p></a>
+     <a class="tool" href="media-library/"><small>04 / INSPIRATION</small><h3>Take a story along.</h3><p>Find books and films to bring a little more context to your journey.</p></a>
+    </div>
+   </section>
+   <section class="closing">
+    <div>
+     <h2>Ready to see somewhere new?</h2>
+     <p>Search a city or country to get a destination guide with nearby places, local weather, costs, and hotel links.</p>
+    </div>
+    <a class="hero-link" href="trip-planner/">Explore destinations worldwide <span aria-hidden="true">↗</span></a>
+   </section>
+   <footer>
+    <span>API ATLAS / GLOBAL TRAVEL GUIDE</span>
+    <span>ESTIMATES ARE GUIDES / CHECK LOCAL INFORMATION</span>
+   </footer>
+  </main>
+  <script>
+   const slides = [
+    { destination: 'Kyoto, Japan', region: 'JAPAN · CULTURE & CITY LIFE', title: 'A slower side<br/>of Kyoto.', description: 'Lantern-lit lanes, temple gardens, and mornings that invite you to wander.', photo: 'photo-1493976040374-85c8e12f0c0e', alt: 'Traditional streets and rooftops in Kyoto' },
+    { destination: 'Paris, France', region: 'FRANCE · ART & CITY LIFE', title: 'Let Paris<br/>set the pace.', description: 'Long lunches, river walks, and one more turn down a beautiful street.', photo: 'photo-1502602898657-3e91760cbb34', alt: 'Paris rooftops and the Eiffel Tower' },
+    { destination: 'Istanbul, Turkey', region: 'TURKEY · HISTORY & FLAVOR', title: 'Meet between<br/>two continents.', description: 'Take the ferry, follow the call to prayer, and make time for another tea.', photo: 'photo-1524231757912-21f4fe3a7200', alt: 'Istanbul skyline above the Bosphorus' },
+    { destination: 'Bali, Indonesia', region: 'INDONESIA · ISLAND & NATURE', title: 'Find your<br/>island rhythm.', description: 'Wake up among rice terraces, find a waterfall, and let the day unfold.', photo: 'photo-1537996194471-e657df975ab4', alt: 'Lush tropical landscape in Bali' }
+   ];
+   const image = document.getElementById('hero-image');
+   const eyebrow = document.getElementById('hero-eyebrow');
+   const title = document.getElementById('hero-title');
+   const description = document.getElementById('hero-description');
+   const destinationLink = document.getElementById('hero-link');
+   const count = document.getElementById('hero-count');
+   const dots = document.getElementById('carousel-dots');
+   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+   let activeSlide = 0;
+   let rotateTimer;
+
+   function showSlide(index) {
+    activeSlide = (index + slides.length) % slides.length;
+    const slide = slides[activeSlide];
+    image.classList.add('is-changing');
+    window.setTimeout(() => {
+     image.src = `https://images.unsplash.com/${slide.photo}?auto=format&fit=crop&w=2000&q=85`;
+     image.alt = slide.alt;
+     eyebrow.textContent = slide.region;
+     title.innerHTML = slide.title;
+     description.textContent = slide.description;
+     destinationLink.href = `trip-planner/index.html?destination=${encodeURIComponent(slide.destination)}`;
+     destinationLink.innerHTML = `Explore ${slide.destination.split(',')[0]} <span aria-hidden="true">↗</span>`;
+     count.textContent = `${String(activeSlide + 1).padStart(2, '0')} / ${String(slides.length).padStart(2, '0')}`;
+     dots.querySelectorAll('button').forEach((dot, dotIndex) => {
+      dot.setAttribute('aria-current', String(dotIndex === activeSlide));
+     });
+     image.classList.remove('is-changing');
+    }, reducedMotion ? 0 : 220);
+    restartRotation();
+   }
+
+   function restartRotation() {
+    window.clearInterval(rotateTimer);
+    if (!reducedMotion && !document.hidden) {
+     rotateTimer = window.setInterval(() => showSlide(activeSlide + 1), 6500);
+    }
+   }
+
+   slides.forEach((slide, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot';
+    dot.type = 'button';
+    dot.setAttribute('aria-label', `Show ${slide.destination}`);
+    dot.setAttribute('aria-current', String(index === activeSlide));
+    dot.addEventListener('click', () => showSlide(index));
+    dots.append(dot);
+   });
+   document.getElementById('previous-slide').addEventListener('click', () => showSlide(activeSlide - 1));
+   document.getElementById('next-slide').addEventListener('click', () => showSlide(activeSlide + 1));
+   document.addEventListener('visibilitychange', restartRotation);
+   restartRotation();
+
+   document.getElementById('destination-search').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const destination = document.getElementById('destination-query').value.trim();
+    if (!destination) return;
+    window.location.href = `trip-planner/index.html?destination=${encodeURIComponent(destination)}`;
+   });
+  </script>
+ </body>
+</html>

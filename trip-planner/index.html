@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Trip Plan / API Atlas
+  </title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="style.css" rel="stylesheet"/>
+    <style>
+     .planner-form{background:#e4efe7;border:1px solid #c7dace}.destination-hint{display:block;margin-top:9px;color:var(--muted);font-size:12px;line-height:1.5}.planner-status{min-height:1.4em;margin:0;color:var(--muted);font-size:13px;line-height:1.5}.planner-status[data-state="error"]{color:#b34f3c}.planner-form button:disabled{cursor:wait;opacity:.7}.plan-source{margin:0 0 18px;color:var(--muted);font-size:13px;line-height:1.5}.live-forecast{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:20px}.live-forecast span{display:flex;flex-direction:column;gap:5px;padding:10px;background:#eef5ef;color:var(--ink);font-size:12px}.live-forecast strong{font:600 12px 'Space Grotesk';text-transform:uppercase}.live-forecast small{color:var(--muted);font-size:10px;line-height:1.3}.forecast-loading{grid-column:1/-1;color:var(--muted)!important;background:transparent!important;padding:0!important}@media(max-width:700px){.live-forecast{grid-template-columns:repeat(2,1fr)}}
+    </style>
+ </head>
+ <body>
+  <main class="shell">
+   <header>
+    <a class="brand" href="../">
+     API
+     <span>
+      ATLAS
+     </span>
+    </a>
+    <span class="section-label">
+     TRIP PLANNER / FIELD NOTES
+    </span>
+   </header>
+   <section class="hero">
+    <div>
+     <p class="eyebrow">
+      MAKE ROOM FOR WONDER
+     </p>
+     <h1>
+      A better plan
+      <br/>
+      <em>
+       for going places.
+      </em>
+     </h1>
+     <p>
+      Choose a destination and get a complete seven-day guide with places to visit, weather, spending, and hotel reservations.
+     </p>
+    </div>
+    <form class="planner-form" id="planner-form">
+     <div class="field">
+      <label for="destination">
+       Where do you want to go?
+      </label>
+      <input id="destination" list="destination-list" placeholder="Any city or country..." aria-describedby="destination-hint" required=""/>
+      <small class="destination-hint" id="destination-hint">Search cities worldwide or enter a named attraction. Choose a country to start at its capital.</small>
+     </div>
+     <datalist id="destination-list">
+     </datalist>
+     <button type="submit">
+      Show my 7-day trip
+      <span>
+       ↗
+      </span>
+     </button>
+    </form>
+   </section>
+   <p class="planner-status" id="planner-status" role="status" aria-live="polite"></p>
+   <section aria-live="polite" class="plan" id="plan">
+    <div class="empty">
+     <span>
+      ✦
+     </span>
+     <h2>
+      Choose your destination.
+     </h2>
+     <p>
+      Enter one location to reveal a seven-day plan, forecast guidance, costs, and hotel links.
+     </p>
+    </div>
+   </section>
+   <footer>
+    <span>
+     TRIP PLAN / API ATLAS
+    </span>
+    <span>
+     Estimates are planning guides, not bookings.
+    </span>
+   </footer>
+  </main>
+  <script src="app.js" type="module">
+  </script>
+ </body>
+</html>

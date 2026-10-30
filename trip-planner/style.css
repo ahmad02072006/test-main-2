@@ -1,0 +1,445 @@
+:root {
+  --ink: #1f2c2a;
+  --muted: #728078;
+  --paper: #f2f1ee;
+  --mint: #dfeae4;
+  --line: #d8ddd8;
+  --coral: #e87a5f;
+  --dark-green: #587b6c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+.shell {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 28px 5vw 40px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  color: inherit;
+  text-decoration: none;
+  font: 700 18px 'Space Grotesk', sans-serif;
+  letter-spacing: -0.04em;
+}
+
+.brand span {
+  color: var(--coral);
+}
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  padding: 82px 0 70px;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--coral);
+  font: 700 10px 'Space Grotesk', sans-serif;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  font: 600 clamp(52px, 8vw, 96px)/0.9 'Space Grotesk', sans-serif;
+  letter-spacing: -0.06em;
+}
+
+.hero h1 em {
+  color: var(--dark-green);
+  font-style: normal;
+}
+
+.hero p:not(.eyebrow) {
+  max-width: 420px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.planner-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  width: 100%;
+  padding: 30px;
+  background: var(--mint);
+  border: 1px solid #c5d6ca;
+}
+
+.planner-form label {
+  display: block;
+  margin-bottom: 9px;
+  font: 600 12px 'Space Grotesk', sans-serif;
+}
+
+.planner-form input,
+.planner-form select {
+  width: 100%;
+  margin: 0;
+  padding: 11px 0;
+  border: 0;
+  border-bottom: 2px solid #a3c0ad;
+  background: transparent;
+  color: var(--ink);
+  font: 16px 'DM Sans', sans-serif;
+  outline: none;
+}
+
+.planner-form input::placeholder {
+  color: rgba(31, 44, 42, 0.5);
+}
+
+.plan {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+
+.empty {
+  padding: 55px 20px 48px;
+  text-align: center;
+  border: 1px dashed #c8d1c8;
+}
+
+.empty span {
+  display: inline-block;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--coral);
+}
+
+.empty h2 {
+  margin: 15px 0 8px;
+  font: 600 27px 'Space Grotesk', sans-serif;
+  letter-spacing: -0.05em;
+}
+
+.empty p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.plan-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 16px 0 20px;
+}
+
+.plan-head h2 {
+  margin: 0;
+  font: 600 clamp(2rem, 3vw, 3rem)/1 'Space Grotesk', sans-serif;
+  letter-spacing: -0.06em;
+}
+
+.plan-head p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.cost {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  text-align: right;
+}
+
+.cost span,
+.cost small {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.cost strong {
+  color: var(--coral);
+  font: 700 clamp(1.3rem, 2vw, 2rem) 'Space Grotesk', sans-serif;
+}
+
+.days {
+  border-top: 1px solid var(--line);
+}
+
+.day {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr) 90px;
+  gap: 18px;
+  align-items: center;
+  padding: 16px 0;
+  min-height: 118px;
+  border-bottom: 1px solid var(--line);
+}
+
+.day-number {
+  color: var(--coral);
+  font: 700 11px 'Space Grotesk', sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.day h3 {
+  margin: 0;
+  font: 600 clamp(1.7rem, 2.5vw, 3rem)/1.1 'Space Grotesk', sans-serif;
+  letter-spacing: -0.06em;
+  color: var(--ink);
+}
+
+.day p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.day-cost {
+  justify-self: end;
+  color: var(--coral);
+  font: 600 clamp(1.2rem, 1.8vw, 2rem) 'Space Grotesk', sans-serif;
+  letter-spacing: -0.05em;
+}
+
+.more-places {
+  margin: 20px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.more-places summary {
+  padding: 15px 0;
+  color: var(--dark-green);
+  font: 600 14px 'Space Grotesk', sans-serif;
+  cursor: pointer;
+}
+
+.more-places ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 20px;
+  margin: 0;
+  padding: 0 0 18px 18px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.trip-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.detail-card {
+  padding: 24px 22px;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--line);
+}
+
+.detail-card h3 {
+  margin: 0 0 12px;
+  font: 600 clamp(1.7rem, 2vw, 2.3rem)/1.1 'Space Grotesk', sans-serif;
+  letter-spacing: -0.06em;
+}
+
+.detail-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.weather-detail .eyebrow,
+.budget-detail .eyebrow,
+.hotel-detail .eyebrow,
+.detail-card .eyebrow {
+  margin-bottom: 12px;
+}
+
+.resource-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.resource-list a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.resource-list strong {
+  display: block;
+  font: 600 15px 'Space Grotesk', sans-serif;
+}
+
+.resource-list span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.hotel-button {
+  display: inline-flex;
+  margin-top: 16px;
+  padding: 12px 18px;
+  background: var(--ink);
+  color: white;
+  text-decoration: none;
+  font: 600 14px 'Space Grotesk', sans-serif;
+}
+
+.live-forecast {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.live-forecast span {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px 8px;
+  background: rgba(255, 255, 255, 0.25);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 12px;
+}
+
+.live-forecast strong {
+  font: 600 11px 'Space Grotesk', sans-serif;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.live-forecast small {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.4;
+}
+
+.forecast-loading {
+  grid-column: 1 / -1;
+  padding: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  color: var(--muted) !important;
+}
+
+.estimate-note {
+  margin: 24px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  padding-top: 28px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 900px) {
+  .plan-head {
+    display: block;
+  }
+
+  .cost {
+    align-items: flex-start;
+    text-align: left;
+    margin-top: 16px;
+  }
+
+  .trip-details {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .hero {
+    padding-top: 54px;
+  }
+
+  .day {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 20px 0;
+  }
+
+  .day-cost {
+    justify-self: start;
+  }
+
+  .more-places ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .live-forecast {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
