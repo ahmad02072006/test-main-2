@@ -443,3 +443,29 @@ footer {
     align-items: flex-start;
   }
 }
+
+button,
+input,
+select {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
+.budget-detail > a:not(.hotel-button) {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  min-height: 44px;
+  margin-top: 8px;
+}
+
+.hotel-button {
+  min-height: 44px;
+  align-items: center;
+}

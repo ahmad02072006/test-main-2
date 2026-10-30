@@ -7,3 +7,12 @@ body.motion-ready [data-reveal]{opacity:0;transform:translateY(24px);transition:
 @media(max-width:720px){.app-shell{padding-top:0}.topbar{padding:0 22px}.topbar-main{min-height:58px}.brand{font-size:16px}.topbar-meta{gap:12px}.trip-nav{gap:2px;min-height:48px;margin:0 -8px}.nav-link{padding:8px 10px;font-size:12px}.destination-hero{min-height:0}.destination-hero-inner{padding:52px 22px 34px}.destination-copy{max-width:540px}.destination-copy h1{font-size:clamp(40px,10vw,56px)}.destination-copy>p:last-child{max-width:410px;font-size:14px}.destination-art{top:20px;right:2%;width:43%;height:210px;opacity:.52}.destination-search .search-row{min-height:54px}.destination-search .search-row button{min-width:100px;padding:0 15px;font-size:14px}.search-icon{padding:0 11px}.destination-search .search-row input{font-size:14px}.weather-overview{grid-template-columns:1fr;gap:20px;padding:42px 0}.weather-overview-copy>p:last-child{margin-bottom:0}.weather-overview .current-panel{min-height:315px}}@media(max-width:420px){.topbar{padding:0 16px}.topbar-meta{gap:8px;font-size:11px}.unit-toggle{padding-left:10px}.nav-link{gap:5px;padding:8px 8px;font-size:11px}.destination-hero-inner{padding-right:16px;padding-left:16px}.destination-copy h1{font-size:40px}.destination-art{right:-8%;width:50%;opacity:.38}.destination-search{border-width:3px}.search-icon{padding:0 8px;font-size:20px}.destination-search .search-row input{font-size:13px}.destination-search .search-row button{min-width:84px;padding:0 10px;font-size:13px}.weather-overview .current-panel{padding:24px 20px}.weather-overview .temperature{font-size:76px}.weather-overview .metrics{gap:20px}}
 @media(prefers-reduced-motion:reduce){.cloud-one,.cloud-two{animation:none}}
 .destination-hero{overflow-x:clip}
+.brand{display:inline-flex;align-items:center;min-height:44px}
+.unit-toggle,.nav-link,.destination-search input,.destination-search button,.currency-section input,.currency-section select,.currency-swap{min-width:44px;min-height:44px}
+.unit-toggle{padding:8px}
+.trip-nav{gap:8px}
+.destination-search .location-results{display:flex;flex-direction:column;gap:8px}
+.destination-search .location-option{min-height:44px}
+.destination-search .search-row input{height:44px}
+.destination-search .search-row button{min-height:54px}
+.destination-search .search-row button{margin-left:8px}
