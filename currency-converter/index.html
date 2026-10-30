@@ -8,7 +8,9 @@
   </title>
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net" rel="preconnect"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/></noscript>
   <link href="style.css" rel="stylesheet"/>
  </head>
  <body>
@@ -89,7 +91,7 @@
       </option>
      </select>
     </div>
-    <button class="swap" id="swap" title="Swap currencies" type="button">
+    <button aria-label="Swap currencies" class="swap" id="swap" title="Swap currencies" type="button">
      ⇄
     </button>
     <div class="currency-field">
@@ -101,13 +103,7 @@
        EUR
       </option>
       <option>
-       USD
-        <option>
-         KRW
-        </option>
-        <option>
-         UZS
-        </option>
+      USD
       </option>
       <option>
        GBP
@@ -120,6 +116,12 @@
       </option>
       <option>
        AUD
+      </option>
+      <option>
+       KRW
+      </option>
+      <option>
+       UZS
       </option>
       <option>
        BTC
@@ -136,12 +138,6 @@
      <span id="result-label">
       100 USD equals
      </span>
-        <option>
-         KRW
-        </option>
-        <option>
-         UZS
-        </option>
      <strong id="result">
       —
      </strong>
@@ -167,7 +163,7 @@
      </span>
     </div>
     <div class="chart-wrap">
-     <canvas id="rate-chart">
+     <canvas id="rate-chart" role="img" aria-label="Line chart showing exchange rate movement over the last seven days">
      </canvas>
     </div>
    </section>
@@ -180,10 +176,9 @@
     </span>
    </footer>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer>
   </script>
   <script src="app.js" type="module">
   </script>
  </body>
 </html>
-

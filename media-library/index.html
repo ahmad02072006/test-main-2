@@ -8,7 +8,8 @@
   </title>
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/></noscript>
   <link href="style.css" rel="stylesheet"/>
  </head>
  <body>
@@ -21,14 +22,14 @@
      </span>
      READ
     </a>
-    <nav>
-     <button class="nav-button active" data-type="movie">
+    <nav aria-label="Media categories">
+     <button class="nav-button active" data-type="movie" type="button" aria-pressed="true">
       Movies
      </button>
-     <button class="nav-button" data-type="book">
+     <button class="nav-button" data-type="book" type="button" aria-pressed="false">
       Books
      </button>
-     <button class="list-button" id="list-button">
+     <button class="list-button" id="list-button" type="button">
       My list
       <b id="list-count">
        0
@@ -56,11 +57,11 @@
      <div class="search-row">
       <input id="search" placeholder="Try “Dune” or “quiet ambition”" type="search"/>
       <span>
-       ⌕
+       <span aria-hidden="true">⌕</span>
       </span>
      </div>
      <div class="filters">
-      <select id="genre">
+      <select id="genre" aria-label="Filter by genre">
        <option value="">
         All genres
        </option>
@@ -77,7 +78,7 @@
         Science fiction
        </option>
       </select>
-      <select id="year">
+      <select id="year" aria-label="Filter by release year">
        <option value="">
         Any year
        </option>
@@ -109,12 +110,12 @@
     <div class="results-grid" id="results">
     </div>
    </section>
-   <aside aria-hidden="true" class="drawer" id="list-drawer">
+   <aside aria-label="Your saved stories" aria-hidden="true" class="drawer" id="list-drawer" inert>
     <div class="drawer-head">
      <h2>
       Your list
      </h2>
-     <button aria-label="Close list" id="close-list">
+     <button aria-label="Close list" id="close-list" type="button">
       ×
      </button>
     </div>
@@ -124,9 +125,9 @@
     <div id="saved-list">
     </div>
    </aside>
-   <div aria-hidden="true" class="modal" id="modal">
+   <div aria-hidden="true" class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" inert>
     <div class="modal-card">
-     <button aria-label="Close details" class="close" id="close-modal">
+     <button aria-label="Close details" class="close" id="close-modal" type="button">
       ×
      </button>
      <div id="modal-content">
@@ -146,4 +147,3 @@
   </script>
  </body>
 </html>
-

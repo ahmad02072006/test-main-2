@@ -8,7 +8,8 @@
   </title>
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/></noscript>
   <link href="style.css" rel="stylesheet"/>
  </head>
  <body>
@@ -22,7 +23,7 @@
       </a>
       <div class="topbar-meta">
        <span id="last-updated">Ready to explore</span>
-       <button class="unit-toggle" id="unit-toggle" type="button">°C <span>/ °F</span></button>
+       <button aria-label="Toggle temperature units" class="unit-toggle" id="unit-toggle" type="button">°C <span>/ °F</span></button>
       </div>
      </div>
      <nav aria-label="Trip guide sections" class="trip-nav">

@@ -8,10 +8,13 @@
   <title>API Atlas | Discover your next destination</title>
   <link href="https://fonts.googleapis.com" rel="preconnect"/>
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link href="https://images.unsplash.com" rel="preconnect"/>
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?fit=crop&amp;fm=webp&amp;w=1280&amp;q=75" imagesrcset="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?fit=crop&amp;fm=webp&amp;w=640&amp;q=75 640w, https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?fit=crop&amp;fm=webp&amp;w=960&amp;q=75 960w, https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?fit=crop&amp;fm=webp&amp;w=1280&amp;q=75 1280w, https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?fit=crop&amp;fm=webp&amp;w=1600&amp;q=75 1600w, https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?fit=crop&amp;fm=webp&amp;w=2000&amp;q=75 2000w" imagesizes="100vw" fetchpriority="high"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/></noscript>
   <style>
    *{box-sizing:border-box}
-   :root{--ink:#182522;--muted:#718079;--paper:#f5f1e9;--line:#d9ded7;--sea:#b9d9d4;--coral:#e9785e;--sun:#f0cf72;--night:#1d3b3b}
+   :root{--ink:#182522;--muted:#58645e;--paper:#f5f1e9;--line:#d9ded7;--sea:#b9d9d4;--coral:#b14a34;--sun:#f0cf72;--night:#1d3b3b}
    html{scroll-behavior:smooth}
    body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}
    a{color:inherit}
@@ -52,7 +55,7 @@
    .search-field input:focus{border-color:var(--dark-green,#587b6c)}
    .search-field input::placeholder{color:#99a29d}
    .search-submit{height:44px;padding:0 20px;border:0;background:var(--coral);color:white;font:600 13px 'Space Grotesk';cursor:pointer}
-   .search-submit:hover{background:#d7654c}
+   .search-submit:hover{background:#a74732}
    .section{padding-top:76px}
    .section-heading{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:24px}
    .section-heading h2{margin:0;font:600 clamp(28px,4vw,40px)/1.08 'Space Grotesk';letter-spacing:-.05em}
@@ -97,7 +100,7 @@
    </header>
    <section class="hero" aria-label="Featured destinations">
     <div class="hero-frame">
-     <img class="hero-image" id="hero-image" src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&amp;fit=crop&amp;w=2000&amp;q=85" alt="Traditional streets and rooftops in Kyoto"/>
+     <img class="hero-image" id="hero-image" src="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?fit=crop&amp;fm=webp&amp;w=1280&amp;q=75" srcset="https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?fit=crop&amp;fm=webp&amp;w=640&amp;q=75 640w, https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?fit=crop&amp;fm=webp&amp;w=960&amp;q=75 960w, https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?fit=crop&amp;fm=webp&amp;w=1280&amp;q=75 1280w, https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?fit=crop&amp;fm=webp&amp;w=1600&amp;q=75 1600w, https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?fit=crop&amp;fm=webp&amp;w=2000&amp;q=75 2000w" sizes="100vw" width="2000" height="1333" fetchpriority="high" decoding="async" alt="Traditional streets and rooftops in Kyoto"/>
      <div class="hero-copy" aria-live="polite">
       <p class="eyebrow" id="hero-eyebrow">JAPAN · CULTURE &amp; CITY LIFE</p>
       <h1 id="hero-title">A slower side<br/>of Kyoto.</h1>
@@ -133,19 +136,19 @@
     </div>
     <div class="destination-grid">
      <a class="destination-card" href="trip-planner/index.html?destination=Paris%2C%20France">
-      <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?fit=crop&amp;fm=webp&amp;w=800&amp;q=75" srcset="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?fit=crop&amp;fm=webp&amp;w=320&amp;q=75 320w, https://images.unsplash.com/photo-1502602898657-3e91760cbb34?fit=crop&amp;fm=webp&amp;w=480&amp;q=75 480w, https://images.unsplash.com/photo-1502602898657-3e91760cbb34?fit=crop&amp;fm=webp&amp;w=640&amp;q=75 640w, https://images.unsplash.com/photo-1502602898657-3e91760cbb34?fit=crop&amp;fm=webp&amp;w=800&amp;q=75 800w, https://images.unsplash.com/photo-1502602898657-3e91760cbb34?fit=crop&amp;fm=webp&amp;w=1200&amp;q=75 1200w" sizes="(max-width: 390px) 100vw, (max-width: 900px) 50vw, 25vw" width="800" height="533" loading="lazy" decoding="async" alt="Eiffel Tower above the rooftops of Paris"/>
       <div class="destination-info"><small>FRANCE · CITY BREAK</small><h3>Paris <span aria-hidden="true">↗</span></h3><p>Museum afternoons and cafe mornings.</p></div>
      </a>
      <a class="destination-card" href="trip-planner/index.html?destination=Tokyo%2C%20Japan">
-      <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?fit=crop&amp;fm=webp&amp;w=800&amp;q=75" srcset="https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?fit=crop&amp;fm=webp&amp;w=320&amp;q=75 320w, https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?fit=crop&amp;fm=webp&amp;w=480&amp;q=75 480w, https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?fit=crop&amp;fm=webp&amp;w=640&amp;q=75 640w, https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?fit=crop&amp;fm=webp&amp;w=800&amp;q=75 800w, https://images.unsplash.com/photo-1536098561742-ca998e48cbcc?fit=crop&amp;fm=webp&amp;w=1200&amp;q=75 1200w" sizes="(max-width: 390px) 100vw, (max-width: 900px) 50vw, 25vw" width="800" height="533" loading="lazy" decoding="async" alt="Tokyo's city skyline and surrounding neighborhoods"/>
       <div class="destination-info"><small>JAPAN · BIG CITY</small><h3>Tokyo <span aria-hidden="true">↗</span></h3><p>Neon nights, quiet shrines, endless neighborhoods.</p></div>
      </a>
      <a class="destination-card" href="trip-planner/index.html?destination=Istanbul%2C%20Turkey">
-      <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?fit=crop&amp;fm=webp&amp;w=800&amp;q=75" srcset="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?fit=crop&amp;fm=webp&amp;w=320&amp;q=75 320w, https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?fit=crop&amp;fm=webp&amp;w=480&amp;q=75 480w, https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?fit=crop&amp;fm=webp&amp;w=640&amp;q=75 640w, https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?fit=crop&amp;fm=webp&amp;w=800&amp;q=75 800w, https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?fit=crop&amp;fm=webp&amp;w=1200&amp;q=75 1200w" sizes="(max-width: 390px) 100vw, (max-width: 900px) 50vw, 25vw" width="800" height="533" loading="lazy" decoding="async" alt="Istanbul's historic skyline beside the Bosphorus"/>
       <div class="destination-info"><small>TURKEY · CULTURE</small><h3>Istanbul <span aria-hidden="true">↗</span></h3><p>Crossroads of flavors, history, and waterways.</p></div>
      </a>
      <a class="destination-card" href="trip-planner/index.html?destination=Bali%2C%20Indonesia">
-      <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?fit=crop&amp;fm=webp&amp;w=800&amp;q=75" srcset="https://images.unsplash.com/photo-1537996194471-e657df975ab4?fit=crop&amp;fm=webp&amp;w=320&amp;q=75 320w, https://images.unsplash.com/photo-1537996194471-e657df975ab4?fit=crop&amp;fm=webp&amp;w=480&amp;q=75 480w, https://images.unsplash.com/photo-1537996194471-e657df975ab4?fit=crop&amp;fm=webp&amp;w=640&amp;q=75 640w, https://images.unsplash.com/photo-1537996194471-e657df975ab4?fit=crop&amp;fm=webp&amp;w=800&amp;q=75 800w, https://images.unsplash.com/photo-1537996194471-e657df975ab4?fit=crop&amp;fm=webp&amp;w=1200&amp;q=75 1200w" sizes="(max-width: 390px) 100vw, (max-width: 900px) 50vw, 25vw" width="800" height="533" loading="lazy" decoding="async" alt="Terraced rice fields and tropical greenery in Bali"/>
       <div class="destination-info"><small>INDONESIA · ISLAND ESCAPE</small><h3>Bali <span aria-hidden="true">↗</span></h3><p>Green rice terraces and an easy island rhythm.</p></div>
      </a>
     </div>
@@ -195,13 +198,24 @@
    let activeSlide = 0;
    let rotateTimer;
 
+   function imageUrl(photo, width) {
+    return `https://images.unsplash.com/${photo}?fit=crop&fm=webp&w=${width}&q=75`;
+   }
+
+   function setHeroImage(slide) {
+    const widths = [640, 960, 1280, 1600, 2000];
+    image.srcset = widths.map((width) => `${imageUrl(slide.photo, width)} ${width}w`).join(', ');
+    image.sizes = '100vw';
+    image.src = imageUrl(slide.photo, 1280);
+    image.alt = slide.alt;
+   }
+
    function showSlide(index) {
     activeSlide = (index + slides.length) % slides.length;
     const slide = slides[activeSlide];
     image.classList.add('is-changing');
     window.setTimeout(() => {
-     image.src = `https://images.unsplash.com/${slide.photo}?auto=format&fit=crop&w=2000&q=85`;
-     image.alt = slide.alt;
+     setHeroImage(slide);
      eyebrow.textContent = slide.region;
      title.innerHTML = slide.title;
      description.textContent = slide.description;

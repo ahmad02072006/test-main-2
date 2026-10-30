@@ -1,5 +1,9 @@
 const TMDB_KEY = 'YOUR_TMDB_API_KEY';
-const poster = (path) => path ? `https://image.tmdb.org/t/p/w500${path}` : '';
+const poster = (path, size = 'w500') => path ? `https://image.tmdb.org/t/p/${size}${path}` : '';
+const posterSrcSet = (path) => path
+    ? ['w342', 'w500', 'w780'].map((size) => `${poster(path, size)} ${Number(size.slice(1))}w`).join(', ')
+    : '';
+const secureImageUrl = (url) => url?.replace(/^http:/, 'https:') || '';
 export async function searchMovies(query = 'popular', filters = {}) {
     if (TMDB_KEY === 'YOUR_TMDB_API_KEY') return [];
     const params = new URLSearchParams({
@@ -23,6 +27,7 @@ export async function searchMovies(query = 'popular', filters = {}) {
         year: item.release_date?.slice(0, 4) || '—',
         rating: item.vote_average?.toFixed(1) || '—',
         image: poster(item.poster_path),
+        imageSrcSet: posterSrcSet(item.poster_path),
         summary: item.overview
     }));
 }
@@ -39,7 +44,11 @@ export async function searchBooks(query) {
             title: info.title,
             year: info.publishedDate?.slice(0, 4) || '—',
             rating: info.averageRating?.toFixed(1) || '—',
-            image: info.imageLinks?.thumbnail?.replace('http:', 'https:') || '',
+            image: secureImageUrl(info.imageLinks?.thumbnail),
+            imageSrcSet: [
+                info.imageLinks?.smallThumbnail && `${secureImageUrl(info.imageLinks.smallThumbnail)} 128w`,
+                info.imageLinks?.thumbnail && `${secureImageUrl(info.imageLinks.thumbnail)} 256w`
+            ].filter(Boolean).join(', '),
             summary: info.description || 'No description available.',
             author: info.authors?.join(', ') || 'Unknown author'
         };

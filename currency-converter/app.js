@@ -19,7 +19,7 @@ function drawChart(values) {
             labels: values.map((_, i) => `Day ${i + 1}`),
             datasets: [{
                 data: values,
-                borderColor: '#ee735d',
+                borderColor: '#b24936',
                 backgroundColor: 'rgba(238,115,93,.12)',
                 fill: true,
                 tension: .4,
@@ -44,7 +44,7 @@ function drawChart(values) {
                         color: '#e1ddd5'
                     },
                     ticks: {
-                        color: '#8c887f'
+                        color: '#625e56'
                     }
                 }
             }
