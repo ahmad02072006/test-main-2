@@ -136,6 +136,11 @@ function renderCurrent(weather) {
 
 function renderForecast(forecast) {
     const daily = forecast.list.filter((item) => item.dt_txt.includes('12:00:00')).slice(0, 5);
+    $('forecast-grid').setAttribute('aria-busy', 'false');
+    if (!daily.length) {
+        $('forecast-grid').innerHTML = '<p class="atlas-empty-state">A forecast is not available for these dates.</p>';
+        return;
+    }
     $('forecast-grid').innerHTML = daily.map((day) => {
         const condition = day.weather[0];
         return `<article class="forecast-card"><span class="forecast-day">${new Date(day.dt * 1000).toLocaleDateString(undefined, { weekday: 'short' })}</span><span class="forecast-icon">${iconMap[condition.main] || '☼'}</span><strong>${displayTemp(day.main.temp_max)}°</strong><span class="low">${displayTemp(day.main.temp_min)}°</span><p>${condition.description}</p></article>`;
@@ -152,6 +157,13 @@ async function loadWeather(loader) {
         $('last-updated').textContent = `Updated ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
     } catch (error) {
         $('status').textContent = error.message;
+        $('forecast-grid').setAttribute('aria-busy', 'false');
+        const message = error instanceof Error ? error.message : 'The forecast is unavailable right now.';
+        const errorState = document.createElement('p');
+        errorState.className = 'atlas-error-state';
+        errorState.setAttribute('role', 'alert');
+        errorState.textContent = `We couldn’t load the forecast. ${message}`;
+        $('forecast-grid').replaceChildren(errorState);
     }
 }
 
@@ -258,8 +270,14 @@ if (navigator.geolocation) navigator.geolocation.getCurrentPosition(({
     loadWeather(() => getWeatherByCoordinates(coords.latitude, coords.longitude, state.units));
 }, () => {
     $('status').textContent = 'Search a location to start planning your trip.';
+    $('forecast-grid').setAttribute('aria-busy', 'false');
+    $('forecast-grid').innerHTML = '<p class="atlas-empty-state">Search for a destination to see its five-day forecast.</p>';
 });
-else $('status').textContent = 'Search a location to start planning your trip.';
+else {
+    $('status').textContent = 'Search a location to start planning your trip.';
+    $('forecast-grid').setAttribute('aria-busy', 'false');
+    $('forecast-grid').innerHTML = '<p class="atlas-empty-state">Search for a destination to see its five-day forecast.</p>';
+}
 initializeCurrencyConverter();
 
 if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {

@@ -5,7 +5,9 @@ const posterSrcSet = (path) => path
     : '';
 const secureImageUrl = (url) => url?.replace(/^http:/, 'https:') || '';
 export async function searchMovies(query = 'popular', filters = {}) {
-    if (TMDB_KEY === 'YOUR_TMDB_API_KEY') return [];
+    if (TMDB_KEY === 'YOUR_TMDB_API_KEY') {
+        throw new Error('Movie search needs a TMDB API key. Add it in media-library/api.js.');
+    }
     const params = new URLSearchParams({
         api_key: TMDB_KEY,
         query,
@@ -59,20 +61,3 @@ export async function getMovieDetails(id) {
     if (!response.ok) throw new Error('Could not load details.');
     return response.json();
 }
-export const demoStories = [{
-    id: 'demo-1',
-    type: 'movie',
-    title: 'Add your first search',
-    year: '—',
-    rating: '★',
-    image: '',
-    summary: 'Add a TMDB key in api.js to search the full film catalogue.'
-}, {
-    id: 'demo-2',
-    type: 'book',
-    title: 'The shelves are waiting',
-    year: '—',
-    rating: '★',
-    image: '',
-    summary: 'Book search works immediately through the Google Books API.'
-}];

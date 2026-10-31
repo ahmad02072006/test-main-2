@@ -86,14 +86,18 @@ function renderForecast(forecast) {
 async function loadForecast(plan) {
     const forecast = $('live-forecast');
     if (!forecast) return;
-    forecast.innerHTML = '<span class="forecast-loading">Loading live forecast...</span>';
+    forecast.setAttribute('aria-busy', 'true');
+    forecast.innerHTML = Array.from({ length: 5 }, () => '<span class="forecast-loading atlas-skeleton" aria-hidden="true"></span>').join('');
     try {
         const [, weatherForecast] = Number.isFinite(plan.latitude) && Number.isFinite(plan.longitude)
             ? await getWeatherByCoordinates(plan.latitude, plan.longitude, 'metric', { name: plan.name, country: plan.country })
             : await getWeatherByCity(plan.name);
         forecast.innerHTML = renderForecast(weatherForecast);
+        forecast.setAttribute('aria-busy', 'false');
     } catch (error) {
-        forecast.innerHTML = `<span class="forecast-loading">${error.message}</span>`;
+        const message = error instanceof Error ? error.message : 'The forecast is unavailable right now.';
+        forecast.innerHTML = `<span class="forecast-loading" role="alert">We couldn’t load the forecast. ${escapeHTML(message)}</span>`;
+        forecast.setAttribute('aria-busy', 'false');
     }
 }
 
@@ -128,6 +132,7 @@ let suggestionRequest = 0;
 function setStatus(message, state = 'info') {
     plannerStatus.textContent = message;
     plannerStatus.dataset.state = state;
+    plannerStatus.setAttribute('aria-busy', String(state === 'loading'));
 }
 
 getCountryDirectory()
@@ -183,7 +188,8 @@ $('destination').addEventListener('input', () => {
 plannerForm.addEventListener('submit', async (event) => {
     event.preventDefault();
     submitButton.disabled = true;
-    setStatus('Looking up the destination and nearby places...');
+    submitButton.setAttribute('aria-busy', 'true');
+    setStatus('Looking up the destination and nearby places...', 'loading');
 
     try {
         const destination = await resolveDestination($('destination').value);
@@ -197,6 +203,7 @@ plannerForm.addEventListener('submit', async (event) => {
         console.error('Could not build trip plan.', error);
     } finally {
         submitButton.disabled = false;
+        submitButton.setAttribute('aria-busy', 'false');
     }
 });
 

@@ -57,6 +57,7 @@ async function convert() {
         const to = $('to').value;
         $('status').textContent = 'Updating market data...';
         $('result').textContent = '—';
+        document.querySelector('.chart-wrap').setAttribute('aria-busy', 'true');
         try {
             state.rate = await getRate(from, to);
             $('result-label').textContent = `${amount.toLocaleString()} ${from} equals`;
@@ -64,6 +65,7 @@ async function convert() {
             $('rate-note').textContent = `1 ${from} = ${state.rate.toLocaleString(undefined, { maximumFractionDigits: 6 })} ${to}`;
             $('trend-pair').textContent = `${from} / ${to}`;
             drawChart(await getHistorical(from, to));
+            document.querySelector('.chart-wrap').setAttribute('aria-busy', 'false');
             $('status').textContent = 'Rate updated just now';
             localStorage.setItem('rate-prefs', JSON.stringify({
                 from,
@@ -72,6 +74,7 @@ async function convert() {
         } catch (error) {
             $('status').textContent = error.message;
             $('rate-note').textContent = 'Add an ExchangeRate-API key for fiat rates.';
+            document.querySelector('.chart-wrap').setAttribute('aria-busy', 'false');
         }
     }
     ['amount', 'from', 'to'].forEach((id) => $(id).addEventListener('input', convert));

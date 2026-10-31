@@ -11,10 +11,11 @@
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
   <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/></noscript>
   <link href="style.css" rel="stylesheet"/>
+  <link href="../ui.css" rel="stylesheet"/>
  </head>
  <body>
-  <main class="app-shell">
-   <header class="topbar" data-reveal>
+  <main class="app-shell" id="main-content">
+   <header class="topbar atlas-page-header" data-reveal>
     <div class="topbar-inner">
      <div class="topbar-main">
       <a class="brand" href=".">
@@ -57,7 +58,7 @@
       </div>
       <ul aria-label="Matching locations" class="location-results" id="location-results"></ul>
      </form>
-     <p class="status" id="status" role="status">Detecting your location...</p>
+     <p class="status" id="status" role="status" aria-live="polite">Detecting your location...</p>
     </div>
    </section>
    <section aria-labelledby="current-title" class="weather-overview" data-reveal>
@@ -95,7 +96,12 @@
       A glanceable plan for the days ahead.
      </p>
     </div>
-    <div class="forecast-grid" id="forecast-grid">
+    <div class="forecast-grid" id="forecast-grid" aria-busy="true" aria-label="Five-day forecast loading">
+     <article class="forecast-card" aria-hidden="true"><div class="atlas-skeleton atlas-skeleton-card__line"></div><div class="atlas-skeleton atlas-skeleton-card__image"></div><div class="atlas-skeleton atlas-skeleton-card__line"></div></article>
+     <article class="forecast-card" aria-hidden="true"><div class="atlas-skeleton atlas-skeleton-card__line"></div><div class="atlas-skeleton atlas-skeleton-card__image"></div><div class="atlas-skeleton atlas-skeleton-card__line"></div></article>
+     <article class="forecast-card" aria-hidden="true"><div class="atlas-skeleton atlas-skeleton-card__line"></div><div class="atlas-skeleton atlas-skeleton-card__image"></div><div class="atlas-skeleton atlas-skeleton-card__line"></div></article>
+     <article class="forecast-card" aria-hidden="true"><div class="atlas-skeleton atlas-skeleton-card__line"></div><div class="atlas-skeleton atlas-skeleton-card__image"></div><div class="atlas-skeleton atlas-skeleton-card__line"></div></article>
+     <article class="forecast-card" aria-hidden="true"><div class="atlas-skeleton atlas-skeleton-card__line"></div><div class="atlas-skeleton atlas-skeleton-card__image"></div><div class="atlas-skeleton atlas-skeleton-card__line"></div></article>
     </div>
    </section>
    <section aria-labelledby="currency-title" class="currency-section" data-reveal id="currency">
@@ -122,7 +128,7 @@
      </label>
      <div aria-live="polite" class="currency-result">
       <strong id="currency-output">—</strong>
-      <span id="currency-status" role="status">Loading currencies...</span>
+      <span id="currency-status" role="status" aria-live="polite">Loading currencies...</span>
      </div>
     </div>
    </section>
@@ -151,6 +157,7 @@
     </span>
    </footer>
   </main>
+  <script src="../ui.js" defer></script>
   <script src="app.js" type="module">
   </script>
  </body>

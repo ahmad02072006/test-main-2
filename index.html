@@ -90,14 +90,18 @@
    button,input{min-width:44px;min-height:44px}
    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hero-image,.destination-card img,.tool{transition:none}}
   </style>
+  <link href="ui.css" rel="stylesheet"/>
  </head>
  <body>
-  <main class="hub">
+  <main class="hub" id="main-content">
    <header class="top">
     <a class="logo" href="./">API <span>ATLAS</span></a>
     <nav class="top-nav" aria-label="Main navigation">
      <a href="#destinations">Discover</a>
      <a href="#travel-tools">Travel tools</a>
+     <a href="weather-travel/">Weather</a>
+     <a href="currency-converter/">Currency</a>
+     <a href="media-library/">Media library</a>
      <a class="nav-cta" href="trip-planner/">Plan a trip ↗</a>
     </nav>
    </header>
@@ -116,6 +120,7 @@
      <div class="carousel-controls" aria-label="Featured destination controls">
       <button class="carousel-button" id="previous-slide" type="button" aria-label="Previous destination">←</button>
       <div class="carousel-dots" id="carousel-dots" aria-label="Choose a destination"></div>
+      <button class="carousel-button" id="toggle-rotation" type="button" aria-pressed="false" aria-label="Pause featured destination rotation">Ⅱ</button>
       <button class="carousel-button" id="next-slide" type="button" aria-label="Next destination">→</button>
      </div>
     </div>
@@ -200,6 +205,7 @@
    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
    let activeSlide = 0;
    let rotateTimer;
+   let rotationPaused = false;
 
    const heroWidths = [568, 760, 960, 1280, 1400, 1420, 1600, 2000];
 
@@ -238,10 +244,18 @@
 
    function restartRotation() {
     window.clearInterval(rotateTimer);
-    if (!reducedMotion && !document.hidden) {
+    if (!reducedMotion && !document.hidden && !rotationPaused) {
      rotateTimer = window.setInterval(() => showSlide(activeSlide + 1), 6500);
     }
    }
+
+   document.getElementById('toggle-rotation').addEventListener('click', (event) => {
+    rotationPaused = !rotationPaused;
+    event.currentTarget.setAttribute('aria-pressed', String(rotationPaused));
+    event.currentTarget.setAttribute('aria-label', `${rotationPaused ? 'Resume' : 'Pause'} featured destination rotation`);
+    event.currentTarget.textContent = rotationPaused ? '▶' : 'Ⅱ';
+    restartRotation();
+   });
 
    slides.forEach((slide, index) => {
     const dot = document.createElement('button');
@@ -264,5 +278,6 @@
     window.location.href = `trip-planner/index.html?destination=${encodeURIComponent(destination)}`;
    });
   </script>
+  <script src="ui.js" defer></script>
  </body>
 </html>

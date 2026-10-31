@@ -30,3 +30,11 @@ Add keys in the relevant `api.js` file:
 - Media: TMDB key in `media-library/api.js`. Google Books requires no key for basic use.
 
 The interfaces show a useful setup state when a key is missing rather than failing silently.
+
+## Shared interface
+
+`ui.css` provides the shared color, typography, spacing, shadow, and radius tokens used across the homepage and tools. `ui.js` adds the site navigation, keyboard-accessible mobile menu, skip link, and a light/dark appearance preference saved in the browser.
+
+## Check the interface
+
+Run the local server above, then check the homepage and each app at desktop, tablet, and mobile widths. Verify the navigation menu by keyboard and touch, toggle the appearance (it should persist across pages), and check loading, empty, and unavailable-service states. Some live panels require an internet connection; movie search also requires a TMDB API key.
