@@ -1,0 +1,6 @@
+name = "api-atlas-api"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://ahmad02072006.github.io"

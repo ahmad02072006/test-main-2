@@ -52,8 +52,15 @@
      </h1>
     </div>
     <div class="search-block">
+     <form id="destination-form" class="destination-search">
+      <label for="destination-query">Get recommendations for a destination</label>
+      <div class="search-row">
+       <input id="destination-query" placeholder="Try Kyoto, Paris, or another place" type="search" autocomplete="off"/>
+       <button type="submit" aria-label="Find destination recommendations">Find</button>
+      </div>
+     </form>
      <label for="search">
-      Search by title, person, or idea
+      Search titles, authors, or destination
      </label>
      <div class="search-row">
       <input id="search" placeholder="Try “Dune” or “quiet ambition”" type="search"/>
@@ -121,8 +128,14 @@
      </button>
     </div>
     <p class="drawer-note">
-     Stories you want to keep close.
+     Favorites, watchlist, and reading list saved on this device.
     </p>
+    <div class="collection-tabs" role="group" aria-label="Saved media lists">
+     <button type="button" data-collection-tab="favorites" aria-pressed="true">Favorites</button>
+     <button type="button" data-collection-tab="watchlist" aria-pressed="false">Watchlist</button>
+     <button type="button" data-collection-tab="reading" aria-pressed="false">Reading list</button>
+    </div>
+    <p id="saved-status" role="status" aria-live="polite"></p>
     <div id="saved-list">
     </div>
    </aside>

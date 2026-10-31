@@ -14,7 +14,8 @@ const state = {
     exchangeRates: new Map(),
     exchangeRateRequests: new Map(),
     conversionId: 0,
-    searchId: 0
+    searchId: 0,
+    weatherRequestId: 0
 };
 const $ = (id) => document.getElementById(id);
 const iconMap = {
@@ -107,21 +108,67 @@ async function initializeCurrencyConverter() {
 function recommendations(weather) {
     const condition = weather.weather[0].main.toLowerCase();
     const temp = weather.main.temp;
-    if (condition.includes('rain') || condition.includes('drizzle') || condition.includes('thunder')) return ['Make room for rain.', 'A light waterproof layer and shoes with grip will keep the day open. Look for covered markets, galleries, and cafes between showers.'];
-    if (condition.includes('snow')) return ['Follow the quiet streets.', 'Insulated layers, waterproof boots, and gloves are the move. Give yourself extra time: beautiful weather can make slow travel better.'];
-    if (temp >= (state.units === 'metric' ? 29 : 84)) return ['Chase the shade.', 'Breathable fabrics, water, and an early start will make the heat feel generous instead of demanding.'];
-    if (temp <= (state.units === 'metric' ? 8 : 46)) return ['Layer with intention.', 'Bring a warm mid-layer and leave room for a hot drink stop. The best cold-weather walks have a destination.'];
-    return ['A very good day to wander.', 'A comfortable layer and shoes you trust are enough. Leave some space in the itinerary for an unplanned turn.'];
+    const wind = weather.wind.speed;
+    if (condition.includes('rain') || condition.includes('drizzle') || condition.includes('thunder')) {
+        return {
+            title: 'Make room for rain.',
+            text: 'Keep the day flexible and check local alerts if storms are expected.',
+            clothing: 'A waterproof shell, quick-drying layers, and shoes with grip.',
+            activity: 'Choose covered markets, galleries, cafes, and indoor landmarks between showers.'
+        };
+    }
+    if (condition.includes('snow')) {
+        return {
+            title: 'Follow the quiet streets.',
+            text: 'Allow extra time for slower travel and changing conditions.',
+            clothing: 'Insulated layers, waterproof boots, gloves, and a warm hat.',
+            activity: 'Try museums, warm indoor stops, or a short scenic walk on cleared paths.'
+        };
+    }
+    if (wind >= (state.units === 'metric' ? 35 : 22)) {
+        return {
+            title: 'Keep an eye on the wind.',
+            text: 'Exposed viewpoints and ferry crossings may feel rougher in strong gusts.',
+            clothing: 'A wind-resistant outer layer and secure accessories.',
+            activity: 'Favor sheltered streets, gardens, and indoor sights over exposed coastal walks.'
+        };
+    }
+    if (temp >= (state.units === 'metric' ? 29 : 84)) {
+        return {
+            title: 'Chase the shade.',
+            text: 'Water, sun protection, and an early start can make a hot day easier.',
+            clothing: 'Breathable light layers, a hat, sunscreen, and comfortable walking shoes.',
+            activity: 'Plan outdoor walks for morning or evening; use museums and shaded parks at midday.'
+        };
+    }
+    if (temp <= (state.units === 'metric' ? 8 : 46)) {
+        return {
+            title: 'Layer with intention.',
+            text: 'Keep a warm mid-layer handy and leave room for a hot drink stop.',
+            clothing: 'A warm mid-layer and weather-appropriate coat; add gloves if it feels cold.',
+            activity: 'Pair a short walk with museums, galleries, and cozy indoor stops.'
+        };
+    }
+    return {
+        title: 'A very good day to wander.',
+        text: 'A comfortable layer and shoes you trust are enough. Leave space for an unplanned turn.',
+        clothing: 'Comfortable layers and walking shoes; bring a light layer for later.',
+        activity: 'Explore on foot, enjoy an outdoor cafe, or take an easy park or riverside walk.'
+    };
 }
 
 function renderCurrent(weather) {
     const [condition] = weather.weather;
     $('location-name').textContent = `${weather.name}, ${weather.sys.country}`;
-    $('location-time').textContent = new Date().toLocaleDateString(undefined, {
+    const fetchedTime = new Date();
+    $('location-time').textContent = `Last updated ${fetchedTime.toLocaleTimeString([], {
+        hour: '2-digit',
+        minute: '2-digit'
+    })} · ${fetchedTime.toLocaleDateString(undefined, {
         weekday: 'long',
         month: 'long',
         day: 'numeric'
-    });
+    })}`;
     $('weather-icon').textContent = iconMap[condition.main] || '☼';
     $('temperature').textContent = displayTemp(weather.main.temp);
     $('temperature-unit').textContent = unitLabel();
@@ -129,35 +176,43 @@ function renderCurrent(weather) {
     $('feels-like').textContent = `${displayTemp(weather.main.feels_like)}°`;
     $('humidity').textContent = `${weather.main.humidity}%`;
     $('wind').textContent = `${Math.round(weather.wind.speed)} ${state.units === 'metric' ? 'm/s' : 'mph'}`;
-    const [title, text] = recommendations(weather);
-    $('recommendation-title').textContent = title;
-    $('recommendation-text').textContent = text;
+    const advice = recommendations(weather);
+    $('recommendation-title').textContent = advice.title;
+    $('recommendation-text').textContent = advice.text;
+    $('clothing-recommendation').textContent = advice.clothing;
+    $('activity-recommendation').textContent = advice.activity;
 }
 
 function renderForecast(forecast) {
-    const daily = forecast.list.filter((item) => item.dt_txt.includes('12:00:00')).slice(0, 5);
+    const daily = forecast.list.slice(0, 7);
     $('forecast-grid').setAttribute('aria-busy', 'false');
+    $('forecast-grid').setAttribute('aria-label', 'Seven-day forecast');
     if (!daily.length) {
+        $('forecast-grid').setAttribute('aria-label', 'Forecast unavailable');
         $('forecast-grid').innerHTML = '<p class="atlas-empty-state">A forecast is not available for these dates.</p>';
         return;
     }
     $('forecast-grid').innerHTML = daily.map((day) => {
         const condition = day.weather[0];
-        return `<article class="forecast-card"><span class="forecast-day">${new Date(day.dt * 1000).toLocaleDateString(undefined, { weekday: 'short' })}</span><span class="forecast-icon">${iconMap[condition.main] || '☼'}</span><strong>${displayTemp(day.main.temp_max)}°</strong><span class="low">${displayTemp(day.main.temp_min)}°</span><p>${condition.description}</p></article>`;
+        return `<article class="forecast-card"><span class="forecast-day">${new Date(day.dt * 1000).toLocaleDateString(undefined, { weekday: 'short' })}</span><span class="forecast-icon" aria-hidden="true">${iconMap[condition.main] || '☼'}</span><strong>${displayTemp(day.main.temp_max)}°</strong><span class="low">${displayTemp(day.main.temp_min)}°</span><p>${condition.description}</p><dl class="forecast-metrics"><div><dt>Humidity</dt><dd>${day.main.humidity ?? '—'}%</dd></div><div><dt>Wind</dt><dd>${Math.round(day.wind?.speed ?? 0)} ${state.units === 'metric' ? 'm/s' : 'mph'}</dd></div><div><dt>Rain chance</dt><dd>${day.precipitation_probability ?? '—'}%</dd></div></dl></article>`;
     }).join('');
 }
 
 async function loadWeather(loader) {
+    const requestId = ++state.weatherRequestId;
     $('status').textContent = 'Reading the sky...';
     try {
         const [weather, forecast] = await loader();
+        if (requestId !== state.weatherRequestId) return;
         renderCurrent(weather);
         renderForecast(forecast);
         $('status').textContent = `Updated for ${weather.name}`;
         $('last-updated').textContent = `Updated ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
     } catch (error) {
+        if (requestId !== state.weatherRequestId) return;
         $('status').textContent = error.message;
         $('forecast-grid').setAttribute('aria-busy', 'false');
+        $('forecast-grid').setAttribute('aria-label', 'Forecast unavailable');
         const message = error instanceof Error ? error.message : 'The forecast is unavailable right now.';
         const errorState = document.createElement('p');
         errorState.className = 'atlas-error-state';
@@ -254,7 +309,7 @@ $('unit-toggle').addEventListener('click', () => {
     const city = $('location-name').textContent.split(',')[0];
     if (state.currentCoordinates) {
         const { latitude, longitude } = state.currentCoordinates;
-        loadWeather(() => getWeatherByCoordinates(latitude, longitude, state.units));
+        loadWeather(() => getWeatherByCoordinates(latitude, longitude, state.units, state.selectedLocation || {}));
     } else if (city !== 'Your location') {
         loadWeather(() => getWeatherByCity(city, state.units));
     }
@@ -271,12 +326,12 @@ if (navigator.geolocation) navigator.geolocation.getCurrentPosition(({
 }, () => {
     $('status').textContent = 'Search a location to start planning your trip.';
     $('forecast-grid').setAttribute('aria-busy', 'false');
-    $('forecast-grid').innerHTML = '<p class="atlas-empty-state">Search for a destination to see its five-day forecast.</p>';
+    $('forecast-grid').innerHTML = '<p class="atlas-empty-state">Search for a destination to see its seven-day forecast.</p>';
 });
 else {
     $('status').textContent = 'Search a location to start planning your trip.';
     $('forecast-grid').setAttribute('aria-busy', 'false');
-    $('forecast-grid').innerHTML = '<p class="atlas-empty-state">Search for a destination to see its five-day forecast.</p>';
+    $('forecast-grid').innerHTML = '<p class="atlas-empty-state">Search for a destination to see its seven-day forecast.</p>';
 }
 initializeCurrencyConverter();
 

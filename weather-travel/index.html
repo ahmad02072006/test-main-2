@@ -65,7 +65,7 @@
     <div class="weather-overview-copy">
      <p class="eyebrow">YOUR TRIP, AT A GLANCE</p>
      <h2 id="current-title">Know before<br/>you go.</h2>
-     <p>Live conditions and a five-day outlook for the place you want to explore.</p>
+     <p>Current conditions and a seven-day outlook for the place you want to explore.</p>
     </div>
     <div class="current-panel" id="current-panel">
      <div class="panel-kicker">CURRENT CONDITIONS</div>
@@ -86,17 +86,13 @@
     <div class="section-heading">
      <div>
       <p class="eyebrow">
-       THE NEXT FIVE DAYS
+       THE NEXT SEVEN DAYS
       </p>
-      <h2>
-       Forecast rhythm
-      </h2>
+      <h2>Seven-day forecast</h2>
      </div>
-     <p class="section-note">
-      A glanceable plan for the days ahead.
-     </p>
+     <p class="section-note">Daily high and low, humidity, peak wind, and precipitation chance.</p>
     </div>
-    <div class="forecast-grid" id="forecast-grid" aria-busy="true" aria-label="Five-day forecast loading">
+    <div class="forecast-grid" id="forecast-grid" aria-busy="true" aria-label="Seven-day forecast loading">
      <article class="forecast-card" aria-hidden="true"><div class="atlas-skeleton atlas-skeleton-card__line"></div><div class="atlas-skeleton atlas-skeleton-card__image"></div><div class="atlas-skeleton atlas-skeleton-card__line"></div></article>
      <article class="forecast-card" aria-hidden="true"><div class="atlas-skeleton atlas-skeleton-card__line"></div><div class="atlas-skeleton atlas-skeleton-card__image"></div><div class="atlas-skeleton atlas-skeleton-card__line"></div></article>
      <article class="forecast-card" aria-hidden="true"><div class="atlas-skeleton atlas-skeleton-card__line"></div><div class="atlas-skeleton atlas-skeleton-card__image"></div><div class="atlas-skeleton atlas-skeleton-card__line"></div></article>
@@ -145,6 +141,10 @@
       <p id="recommendation-text">
        Search for a destination to see its forecast and start planning your trip.
       </p>
+       <ul class="weather-advice" aria-label="Weather-based clothing and activity suggestions">
+        <li><strong>What to wear</strong><span id="clothing-recommendation">Search a destination for a clothing suggestion.</span></li>
+        <li><strong>Things to do</strong><span id="activity-recommendation">Search a destination for weather-friendly activity ideas.</span></li>
+       </ul>
      </div>
     </div>
    </section>
