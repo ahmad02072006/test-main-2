@@ -469,3 +469,348 @@ select {
   min-height: 44px;
   align-items: center;
 }
+
+.planner-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: end;
+  background: #e4efe7;
+  border: 1px solid #c7dace;
+  border-radius: var(--atlas-radius-md, 1rem);
+  box-shadow: var(--atlas-shadow-sm, 0 4px 16px rgb(22 42 36 / 7%));
+}
+
+.planner-form .field:first-child,
+.planner-form > button {
+  grid-column: 1 / -1;
+}
+
+.planner-form button {
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 0;
+  background: var(--ink);
+  color: #fff;
+  font: 600 14px 'Space Grotesk', sans-serif;
+  cursor: pointer;
+}
+
+.planner-form button:disabled {
+  cursor: wait;
+  opacity: .7;
+}
+
+.planner-form input:focus-visible,
+.activity-form input:focus-visible,
+.activity-form button:focus-visible,
+.remove-activity:focus-visible {
+  outline: 3px solid var(--coral);
+  outline-offset: 3px;
+}
+
+.destination-hint {
+  display: block;
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.planner-status {
+  min-height: 1.5em;
+  margin: 0 0 16px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.planner-status[data-state="error"] {
+  color: #a53d2b;
+}
+
+.plan-source {
+  margin: 0 0 20px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.planner-map-section {
+  margin: 24px 0 42px;
+}
+
+.planner-map-section h3 {
+  margin: 0 0 16px;
+  font: 600 1.6rem/1.1 'Space Grotesk', sans-serif;
+  letter-spacing: -.04em;
+}
+
+.destination-map {
+  width: 100%;
+  height: clamp(260px, 42vw, 420px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--atlas-radius-md, 1rem);
+  background: #e4efe7;
+  z-index: 0;
+}
+
+.map-message {
+  min-height: 1.5em;
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.planner-map-section .more-places {
+  margin-top: 8px;
+}
+
+.itinerary-section {
+  margin: 38px 0;
+}
+
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 20px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font: 600 clamp(1.8rem, 3vw, 2.5rem)/1 'Space Grotesk', sans-serif;
+  letter-spacing: -.06em;
+}
+
+.section-note {
+  max-width: 380px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.day-card {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+
+.day-card:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.day-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.day-card-head h3 {
+  margin: 5px 0 0;
+  font: 600 1.5rem/1.1 'Space Grotesk', sans-serif;
+}
+
+.day-card .day-number {
+  display: block;
+}
+
+.day-cost {
+  display: grid;
+  gap: 4px;
+  justify-items: end;
+  color: var(--coral);
+}
+
+.day-cost small {
+  color: var(--muted);
+  font-size: 9px;
+  letter-spacing: .12em;
+}
+
+.day-cost strong {
+  font: 600 1.2rem 'Space Grotesk', sans-serif;
+}
+
+.activity-list {
+  display: grid;
+  gap: 8px;
+  margin: 16px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.activity-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--atlas-radius-sm, .5rem);
+  background: var(--atlas-surface, #fffefa);
+}
+
+.activity-item > span {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  font-weight: 600;
+}
+
+.activity-item strong {
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.suggestion-tag {
+  color: var(--dark-green);
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.remove-activity {
+  min-height: 40px;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--atlas-radius-sm, .5rem);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.activity-empty {
+  padding: 12px 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.activity-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(120px, .35fr) auto;
+  align-items: end;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.activity-form label {
+  display: grid;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.activity-form input {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: var(--atlas-radius-sm, .5rem);
+  background: var(--atlas-surface, #fffefa);
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.suggestion-note {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.activity-form button {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: var(--atlas-radius-sm, .5rem);
+  background: var(--ink);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.budget-detail #trip-cost-comparison {
+  margin-top: 10px;
+}
+
+.live-forecast {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.live-forecast span {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  background: #eef5ef;
+  color: var(--ink);
+  font-size: 12px;
+}
+
+.live-forecast strong {
+  font: 600 12px 'Space Grotesk', sans-serif;
+  text-transform: uppercase;
+}
+
+.live-forecast small {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.forecast-loading {
+  grid-column: 1 / -1;
+  color: var(--muted) !important;
+}
+
+@media (max-width: 700px) {
+  .planner-form {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 20px;
+  }
+
+  .planner-form .field:first-child,
+  .planner-form > button {
+    grid-column: auto;
+  }
+
+  .section-heading {
+    display: block;
+  }
+
+  .section-note {
+    margin-top: 12px;
+  }
+
+  .activity-form {
+    grid-template-columns: minmax(0, 1fr) minmax(95px, .5fr);
+  }
+
+  .activity-form button {
+    grid-column: 1 / -1;
+  }
+
+  .activity-item {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 8px;
+  }
+
+  .remove-activity {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .live-forecast {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
