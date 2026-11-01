@@ -171,6 +171,19 @@ select {
   color: var(--atlas-brand);
 }
 
+.atlas-site-links .nav-cta {
+  padding: 12px 16px;
+  border-radius: var(--atlas-radius-sm);
+  color: white;
+  background: var(--atlas-deep);
+  font-weight: 700;
+}
+
+.atlas-site-links .nav-cta:hover {
+  color: white;
+  background: var(--atlas-brand);
+}
+
 .atlas-site-actions {
   display: flex;
   align-items: center;

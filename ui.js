@@ -1,9 +1,10 @@
 const routes = [
-  ['Discover', 'index.html'],
-  ['Trip planner', 'trip-planner/'],
-  ['Weather', 'weather-travel/'],
-  ['Currency', 'currency-converter/'],
-  ['Place info', 'place-info/']
+  { label: 'Discover', homePath: '#destinations', path: 'index.html#destinations' },
+  { label: 'Travel tools', homePath: '#travel-tools', path: 'index.html#travel-tools' },
+  { label: 'Weather', homePath: 'weather-travel/', path: 'weather-travel/', currentPath: 'weather-travel' },
+  { label: 'Currency', homePath: 'currency-converter/', path: 'currency-converter/', currentPath: 'currency-converter' },
+  { label: 'Place info', homePath: 'place-info/', path: 'place-info/', currentPath: 'place-info' },
+  { label: 'Plan a trip', homePath: 'trip-planner/', path: 'trip-planner/', currentPath: 'trip-planner' }
 ];
 
 const isHome = document.querySelector('.top');
@@ -74,6 +75,15 @@ function setMenuOpen(button, menu, open) {
 function addSharedHeader() {
   if (isHome) {
     const nav = isHome.querySelector('.top-nav');
+    nav.replaceChildren();
+    routes.forEach((route, index) => {
+      const link = document.createElement('a');
+      link.href = route.homePath;
+      link.textContent = route.label;
+      if (index === routes.length - 1) link.className = 'nav-cta';
+      if (route.label === 'Discover') link.setAttribute('aria-current', 'page');
+      nav.append(link);
+    });
     nav.id = 'atlas-site-links';
     nav.dataset.open = 'false';
     nav.setAttribute('aria-label', 'Main navigation');
@@ -107,11 +117,12 @@ function addSharedHeader() {
   nav.id = 'atlas-site-links';
   nav.dataset.open = 'false';
   nav.setAttribute('aria-label', 'Main navigation');
-  routes.forEach(([label, path]) => {
+  routes.forEach((route, index) => {
     const link = document.createElement('a');
-    link.href = `${rootPath}${path}`;
-    link.textContent = label;
-    if (window.location.pathname.includes(path.replace(/\/$/, ''))) {
+    link.href = `${rootPath}${route.path}`;
+    link.textContent = route.label;
+    if (index === routes.length - 1) link.className = 'nav-cta';
+    if (route.currentPath && window.location.pathname.includes(route.currentPath)) {
       link.setAttribute('aria-current', 'page');
     }
     nav.append(link);
