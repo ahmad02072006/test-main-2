@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ahmad02072006.github.io/test-main-2/sitemap.xml

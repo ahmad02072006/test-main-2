@@ -21,6 +21,10 @@ python3 -m http.server 8000
 
 Then open `http://localhost:8000/` and choose an app folder. The project has no build step.
 
+## Search indexing
+
+The public GitHub Pages site includes page titles and descriptions, canonical URLs, and a sitemap at `https://ahmad02072006.github.io/test-main-2/sitemap.xml`. To request indexing, add the site as a URL-prefix property in [Google Search Console](https://search.google.com/search-console), complete its ownership verification, and submit `sitemap.xml`. Search engines decide when and whether pages appear in results; indexing and ranking are not immediate or guaranteed.
+
 ## API providers and backend setup
 
 Weather forecasts and geocoding use Open-Meteo and require no API key. The standalone trip-planner also uses Open-Meteo, Wikipedia, and Wikidata, with no keys.
