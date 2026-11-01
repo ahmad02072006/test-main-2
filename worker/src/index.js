@@ -82,31 +82,6 @@ async function handleRates(url, env, request) {
   };
 }
 
-async function handleMovies(url, env, request) {
-  if (!env.TMDB_ACCESS_TOKEN) {
-    return { status: 503, body: { error: 'Movie search is not configured. Set the TMDB_ACCESS_TOKEN Worker secret.' } };
-  }
-  const query = url.searchParams.get('query')?.trim();
-  const trending = url.searchParams.get('mode') === 'trending';
-  const match = url.pathname.match(/^\/media\/movies\/(\d+)$/);
-  if (!query && !trending && !match) return { status: 400, body: { error: 'Enter a destination or movie title.' } };
-  const endpoint = match
-    ? `https://api.themoviedb.org/3/movie/${match[1]}?language=en-US`
-    : trending
-      ? 'https://api.themoviedb.org/3/trending/movie/week?language=en-US'
-      : `https://api.themoviedb.org/3/search/movie?language=en-US&include_adult=false&query=${encodeURIComponent(query.slice(0, 100))}&page=1`;
-  const cacheRequest = new Request(endpoint, {
-    headers: { Authorization: `Bearer ${env.TMDB_ACCESS_TOKEN}`, Accept: 'application/json' }
-  });
-  const response = await cachedFetch(cacheRequest, match ? 86400 : 1800);
-  if (!response.ok) {
-    const error = providerError(response, 'TMDB');
-    return { status: error.status, body: { error: error.message } };
-  }
-  const data = await response.json();
-  return { status: 200, body: data };
-}
-
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -131,8 +106,6 @@ export default {
       let result;
       if (url.pathname === '/rates') {
         result = await handleRates(url, env, request);
-      } else if (url.pathname === '/media/movies' || /^\/media\/movies\/\d+$/.test(url.pathname)) {
-        result = await handleMovies(url, env, request);
       } else {
         result = { status: 404, body: { error: 'API route not found.' } };
       }

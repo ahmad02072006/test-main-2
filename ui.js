@@ -3,7 +3,7 @@ const routes = [
   ['Trip planner', 'trip-planner/'],
   ['Weather', 'weather-travel/'],
   ['Currency', 'currency-converter/'],
-  ['Media library', 'media-library/']
+  ['Place info', 'place-info/']
 ];
 
 const isHome = document.querySelector('.top');

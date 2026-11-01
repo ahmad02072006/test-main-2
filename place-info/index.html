@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Look up cities, countries, and landmarks for a quick introduction, key facts, and a map."/>
+  <meta name="theme-color" content="#f5f1e9"/>
+  <title>Place Info / API Atlas</title>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'"/>
+  <noscript><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/></noscript>
+  <link href="style.css" rel="stylesheet"/>
+  <link href="../ui.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <main class="place-page" id="main-content">
+   <a class="back-link" href="../index.html">← Back to Discover</a>
+   <section class="place-intro" aria-labelledby="page-title">
+    <div>
+     <p class="eyebrow">A QUICK FIELD GUIDE</p>
+     <h1 id="page-title">Know a place<br/><em>before you go.</em></h1>
+     <p class="place-lede">Look up a city, country, or landmark for a short introduction, useful facts, and a map.</p>
+    </div>
+    <form class="place-search" id="place-search">
+     <label for="place-query">What place are you curious about?</label>
+     <div class="search-row">
+      <input id="place-query" name="place" type="search" placeholder="Try Kyoto, Japan" autocomplete="off" required/>
+      <button type="submit">Search <span aria-hidden="true">↗</span></button>
+     </div>
+     <p class="search-note">Place information from Wikipedia. No API key needed.</p>
+    </form>
+   </section>
+   <p class="place-status" id="place-status" role="status" aria-live="polite">Search for a place to get started.</p>
+   <article class="place-result" id="place-result" aria-live="polite" hidden>
+    <div class="place-photo" id="place-photo">
+     <img id="place-image" alt="" hidden/>
+     <span id="photo-placeholder">A place worth knowing</span>
+    </div>
+    <div class="place-details">
+     <p class="eyebrow">PLACE NOTES</p>
+     <h2 id="place-title"></h2>
+     <p class="place-description" id="place-description"></p>
+     <h3>Key facts</h3>
+     <dl class="place-facts">
+      <div><dt>Known as</dt><dd id="place-kind"></dd></div>
+      <div><dt>Coordinates</dt><dd id="place-coordinates"></dd></div>
+      <div><dt>Reference</dt><dd><a id="article-link" target="_blank" rel="noopener noreferrer">Wikipedia article <span aria-hidden="true">↗</span></a></dd></div>
+     </dl>
+     <a class="map-link" id="map-link" target="_blank" rel="noopener noreferrer">View on map <span aria-hidden="true">↗</span></a>
+    </div>
+   </article>
+   <footer class="place-footer">
+    <span>API ATLAS / PLACE INFO</span>
+    <span>PLACE DETAILS BY WIKIPEDIA</span>
+   </footer>
+  </main>
+  <script src="../ui.js" defer></script>
+  <script src="app.js" defer></script>
+ </body>
+</html>

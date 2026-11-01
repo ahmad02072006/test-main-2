@@ -1,12 +1,12 @@
 # API Atlas
 
-The homepage is a global travel hub linking the destination planner, weather, currency, and media tools.
+The homepage is a global travel hub linking the destination planner, weather, currency, and place information.
 
 Four modular Vanilla JavaScript applications (no frontend framework or build step):
 
 - `weather-travel/` - geolocation weather, seven-day forecast, units, and weather-based travel recommendations.
 - `currency-converter/` - fiat and crypto conversion, rate history, favorites/comparisons, travel budget, and a Chart.js view.
-- `media-library/` - TMDB movie search, Open Library book search, detail modal, destination search, and local saved collections.
+- `place-info/` - Wikipedia place search with a photo, short description, key facts, and map link. It needs no API key.
 - `trip-planner/` - live city or country search with nearby place suggestions and a seven-day itinerary.
 
 The trip planner gets country/capital data from [Countries](https://github.com/annexare/Countries), worldwide city coordinates and live city suggestions from Open-Meteo, named attraction coordinates and popular nearby place suggestions from Wikipedia (ranked with Wikidata sitelinks). Attraction lookup samples multiple nearby areas and searches landmark, museum, monument, park, temple, and related articles; the planner also exposes additional results beyond the seven-day itinerary. Country searches start in the country's capital; entering a city with its country (for example, `Paris, France`) disambiguates duplicate city names. These services need an internet connection; suggestions are based on available Wikipedia coverage and cannot guarantee every attraction or a definitive popularity ranking.
@@ -31,14 +31,11 @@ The currency converter uses:
 - Frankfurter for historical fiat reference rates (no key).
 - CoinGecko for crypto spot and historical data (the current public endpoints need no key, but are rate-limited).
 
-The media library uses TMDB for movies and needs a TMDB API read access token stored as the Worker secret `TMDB_ACCESS_TOKEN`. Open Library search and book details need no key. Favorites, watchlist, and reading list are saved in this browser's `localStorage` only.
-
-Deploy the Worker from the `worker/` directory and set its secrets without adding them to the website:
+Deploy the Worker from the `worker/` directory and set its secret without adding it to the website:
 
 ```sh
 cd worker
 npx wrangler secret put EXCHANGE_RATE_API_KEY
-npx wrangler secret put TMDB_ACCESS_TOKEN
 npx wrangler deploy
 ```
 
@@ -46,7 +43,7 @@ Set the public Worker URL in `api-config.js` as `window.API_ATLAS_CONFIG = { bas
 
 The browser and Worker cache successful provider responses to reduce repeat requests; provider quotas still apply. The Worker endpoints are public read APIs, so CORS is not authentication—configure Cloudflare rate limiting and monitor provider quotas before high-volume production use.
 
-Without a deployed Worker URL and its secrets, the converter and movie catalog show explicit setup errors rather than sample data. Open Library and Open-Meteo continue to work without this backend.
+Without a deployed Worker URL and its secret, the currency converter shows an explicit setup error rather than sample data. Place information and Open-Meteo work without this backend.
 
 ## Shared interface
 
@@ -54,4 +51,4 @@ Without a deployed Worker URL and its secrets, the converter and movie catalog s
 
 ## Check the interface
 
-Run the local server above, then check the homepage and each app at desktop, tablet, and mobile widths. Verify the navigation menu by keyboard and touch, toggle the appearance (it should persist across pages), and check loading, empty, and unavailable-service states. Live panels require an internet connection; the currency converter and movie search also need the configured Worker and provider secrets described above.
+Run the local server above, then check the homepage and each app at desktop, tablet, and mobile widths. Verify the navigation menu by keyboard and touch, toggle the appearance (it should persist across pages), and check loading, empty, and unavailable-service states. Live panels require an internet connection; the currency converter also needs the configured Worker and provider secret described above.
